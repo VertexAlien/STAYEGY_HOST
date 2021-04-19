@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -9,9 +10,8 @@ import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy_host/container/SnackBar.dart';
+import 'package:stayegy_host/container/bottom_button.dart';
 import 'package:stayegy_host/container/loading_Overlay.dart';
-
-import 'file:///D:/Stayegy/STAYEGY_DEVELOPMENT/stayegy_host/lib/container/bottom_button.dart';
 
 class login_otp extends StatefulWidget {
   @override
@@ -61,20 +61,31 @@ class _login_otpState extends State<login_otp> {
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                onChanged: (value) => _otpCode = value,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintText: 'ENTER OTP',
+                ),
+              ),
               // OTPTextField is a dart package: "otp_text_field: ^1.0.1"
               // Link: https://pub.dev/packages/otp_text_field
-              child: OTPTextField(
-                length: 6,
-                width: MediaQuery.of(context).size.width,
-                fieldWidth: 35,
-                style: TextStyle(fontSize: 35),
-                textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldStyle: FieldStyle.underline,
-                onCompleted: (code) {
-                  _otpCode = code;
-                  print("Entered otp: " + code);
-                },
-              ),
+              // child: OTPTextField(
+              //   length: 6,
+              //   width: MediaQuery.of(context).size.width,
+              //   fieldWidth: 35,
+              //   style: TextStyle(fontSize: 35),
+              //   textFieldAlignment: MainAxisAlignment.spaceAround,
+              //   fieldStyle: FieldStyle.underline,
+              //   onCompleted: (code) {
+              //     _otpCode = code;
+              //     print("Entered otp: " + code);
+              //   },
+              // ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),

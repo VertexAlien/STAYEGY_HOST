@@ -30,11 +30,11 @@ class appdrawer extends StatelessWidget {
                   ),
                 ),
                 Divider(
-                  thickness: 0.85,
+                  thickness: 2.0,
                   color: Colors.white,
                 ),
                 drawer_data(
-                  imagePath: 'images/account_icon.png',
+                  imagePath: 'images/booking_icon.png',
                   textData: 'Bookings',
                   onTap: () {
                     Navigator.push(context,
@@ -42,7 +42,7 @@ class appdrawer extends StatelessWidget {
                   },
                 ),
                 drawer_data(
-                  imagePath: 'images/booking_icon.png',
+                  imagePath: 'images/guest_icon.png',
                   textData: 'Guests',
                   onTap: () {
                     Navigator.push(context,
