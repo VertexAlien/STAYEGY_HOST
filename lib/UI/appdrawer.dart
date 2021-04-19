@@ -36,6 +36,7 @@ class appdrawer extends StatelessWidget {
                 drawer_data(
                   imagePath: 'images/booking_icon.png',
                   textData: 'Bookings',
+                  scale: 8,
                   onTap: () {
                     Navigator.push(context,
                         CupertinoPageRoute(builder: (_) => BookingPage()));
@@ -44,6 +45,7 @@ class appdrawer extends StatelessWidget {
                 drawer_data(
                   imagePath: 'images/guest_icon.png',
                   textData: 'Guests',
+                  scale: 8,
                   onTap: () {
                     Navigator.push(context,
                         CupertinoPageRoute(builder: (_) => GuestsPage()));
@@ -56,6 +58,7 @@ class appdrawer extends StatelessWidget {
               child: drawer_data(
                 imagePath: 'images/logout_icon.png',
                 textData: 'LOG OUT',
+                scale: 10,
                 width: 10,
                 onTap: () {
                   BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
