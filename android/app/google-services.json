@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "820352725847",
+    "project_id": "stayegyhost-d441d",
+    "storage_bucket": "stayegyhost-d441d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820352725847:android:7558f68376da23a7618412",
+        "android_client_info": {
+          "package_name": "com.stayegy.stayegy.host"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820352725847-l546jtsiem3om0kansam459efuilvc9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9XALp39DNIEC9_0Lr3bL5Qp1aXuAiaYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820352725847-l546jtsiem3om0kansam459efuilvc9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
