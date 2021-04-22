@@ -56,9 +56,12 @@ class HomePage extends StatelessWidget {
             return state is LoadHotelDetailsCompleteState
                 ? SafeArea(
                     child: RefreshIndicator(
+                      color: Colors.white,
+                      backgroundColor: Colors.black,
                       onRefresh: () {
                         BlocProvider.of<LogInBloc>(context)
                             .add(HomePageReloadEvent());
+                        return null;
                       },
                       child: CustomScrollView(
                         slivers: [
