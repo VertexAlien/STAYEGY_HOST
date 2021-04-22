@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
 import 'package:stayegy_host/bloc/Repository/User_Details.dart';
+import 'package:stayegy_host/bloc/Repository/hotel.dart';
 
 class UserRepository {
   final auth.FirebaseAuth _firebaseAuth;
@@ -95,5 +96,20 @@ class UserRepository {
     return Future.wait([
       _firebaseAuth.signOut(),
     ]);
+  }
+
+  Future<Hotel> getHotelDetails() async {
+    final documentReference = await db
+        .collection("users")
+        .doc("${_firebaseAuth.currentUser.uid}")
+        .get();
+    String hotelName = documentReference.get("hotel").toString();
+
+    final hotelReference =
+        await db.collection("hotels").doc("$hotelName").get();
+
+    Hotel hotel = Hotel.fromMap(hotelReference.data());
+
+    return hotel;
   }
 }

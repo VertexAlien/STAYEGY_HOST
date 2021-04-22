@@ -16,4 +16,14 @@ class LoadingOverlay {
           );
         });
   }
+
+  Widget buildWidget(BuildContext context) {
+    return Container(
+      color: Colors.black.withOpacity(0.8),
+      child: SpinKitSquareCircle(
+        color: Colors.white70,
+        size: 20,
+      ),
+    );
+  }
 }

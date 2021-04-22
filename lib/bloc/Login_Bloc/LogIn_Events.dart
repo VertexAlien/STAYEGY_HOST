@@ -43,3 +43,7 @@ class UploadDetailsEvent extends LogInEvent {
 
   UploadDetailsEvent({this.name, this.email, this.gender, this.image});
 }
+
+class LoadHotelDetailsEvent extends LogInEvent {}
+
+class HomePageReloadEvent extends LogInEvent {}

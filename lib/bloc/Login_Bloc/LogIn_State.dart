@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:stayegy_host/bloc/Repository/hotel.dart';
 
 abstract class LogInState extends Equatable {
   @override
@@ -70,4 +71,13 @@ class OtpExceptionState extends LogInState {
 
   @override
   List<Object> get props => [message];
+}
+
+class LoadHotelDetailsCompleteState extends LogInState {
+  final Hotel hotel;
+
+  LoadHotelDetailsCompleteState({this.hotel});
+
+  @override
+  List<Object> get props => [hotel];
 }

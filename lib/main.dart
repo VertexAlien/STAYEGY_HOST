@@ -5,6 +5,7 @@ import 'package:stayegy_host/UI/Splash_Page.dart';
 import 'package:stayegy_host/UI/home_page.dart';
 import 'package:stayegy_host/UI/login_page.dart';
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_States.dart';
+import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy_host/bloc/Repository/User_Details.dart';
 
 import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
           } else if (state is Unauthenticated) {
             return login_page();
           } else if (state is Authenticated) {
+            BlocProvider.of<LogInBloc>(context).add(LoadHotelDetailsEvent());
             return HomePage();
           } else {
             return SplashPage();

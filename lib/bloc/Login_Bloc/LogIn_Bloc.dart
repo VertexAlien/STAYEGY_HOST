@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stayegy_host/bloc/Repository/UserRepository.dart';
 import 'package:stayegy_host/bloc/Repository/User_Details.dart';
+import 'package:stayegy_host/bloc/Repository/hotel.dart';
 
 import 'LogIn_Events.dart';
 import 'LogIn_State.dart';
@@ -64,6 +65,12 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
           gender: event.gender,
           image: event.image);
       yield RegistrationCompleteState(_userCredential.user);
+    } else if (event is LoadHotelDetailsEvent) {
+      yield* _mapLoadHomePageEventToState(event);
+    } else if (event is HomePageReloadEvent) {
+      yield LoadingState();
+
+      yield* _mapLoadHomePageEventToState(event);
     }
   }
 
@@ -121,5 +128,11 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         PhoneCodeSent,
         PhoneCodeAutoRetrievalTimeout);
     yield* eventStream.stream;
+  }
+
+  Stream<LogInState> _mapLoadHomePageEventToState(LogInEvent event) async* {
+    Hotel hotel = await _userRepository.getHotelDetails();
+
+    yield LoadHotelDetailsCompleteState(hotel: hotel);
   }
 }

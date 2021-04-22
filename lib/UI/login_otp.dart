@@ -44,6 +44,7 @@ class _login_otpState extends State<login_otp> {
                 .buildSnackBar(context, message: _message, color: Colors.red);
           } else if (state is LogInCompleteState) {
             _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
+            // _loginBloc.add(LoadHotelDetailsEvent());
             Navigator.popUntil(context, (route) => route.isFirst);
           } else if (state is LoadingState) {
             LoadingOverlay().build(context);
