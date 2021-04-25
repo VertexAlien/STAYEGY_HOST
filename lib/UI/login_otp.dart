@@ -30,6 +30,7 @@ class _login_otpState extends State<login_otp> {
 
     TextEditingController otp_getter = new TextEditingController();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: BlocListener<LogInBloc, LogInState>(
         listener: (context, state) {
           if (state is ExceptionState || state is OtpExceptionState) {
