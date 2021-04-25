@@ -42,11 +42,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       try {
         _userCredential =
             await _userRepository.verifyAndLogin(verID, event.otp);
-        final bool isRegistered = await _userRepository.checkForRegistration(
-            _userDetails, _userCredential.user.uid);
-        if (_userCredential.user != null && !isRegistered) {
-          yield RegistrationNeededState();
-        } else if (_userCredential.user != null && isRegistered) {
+        if (_userCredential.user != null) {
           yield LogInCompleteState(_userCredential.user);
         } else {
           yield OtpExceptionState(message: "Invalid otp!");

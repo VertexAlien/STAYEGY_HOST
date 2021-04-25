@@ -45,19 +45,6 @@ class UserRepository {
     return user;
   }
 
-  Future<bool> checkForRegistration(UserDetails user, String userId) async {
-    final String uid = userId;
-    final documentReference = await db.collection("users").doc(userId).get();
-
-    if (documentReference.exists) {
-      return true;
-    } else {
-      user.uid = uid;
-      await documentReference.reference.set(user.toJason());
-      return false;
-    }
-  }
-
   Future<void> uploadUserDetails(
       {UserDetails user,
       String name,
@@ -80,7 +67,8 @@ class UserRepository {
         gender: gender,
         picUrl: picUrl);
 
-    final documentReference = await db.collection("users").doc(user.uid).get();
+    final documentReference =
+        await db.collection("hotelOwner").doc(user.uid).get();
     await documentReference.reference.set(user.toJason());
   }
 
@@ -100,13 +88,12 @@ class UserRepository {
 
   Future<Hotel> getHotelDetails() async {
     final documentReference = await db
-        .collection("users")
+        .collection("hotelOwner")
         .doc("${_firebaseAuth.currentUser.uid}")
         .get();
-    String hotelName = documentReference.get("hotel").toString();
+    String hotelID = documentReference.get("hid").toString();
 
-    final hotelReference =
-        await db.collection("hotels").doc("$hotelName").get();
+    final hotelReference = await db.collection("hotels").doc("$hotelID").get();
 
     Hotel hotel = Hotel.fromMap(hotelReference.data());
 

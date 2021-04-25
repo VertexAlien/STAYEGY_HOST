@@ -203,7 +203,7 @@ class HomePage extends StatelessWidget {
                                             return Card(
                                               margin: EdgeInsets.fromLTRB(
                                                   3, 5, 3, 5),
-                                              color: state.hotel.closeRooms
+                                              color: state.hotel.closedRooms
                                                       .contains(index + 1)
                                                   ? Color(0xffec524b)
                                                   : state.hotel.bookedRooms
