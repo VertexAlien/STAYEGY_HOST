@@ -40,8 +40,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     } else if (event is VerifyOtpEvent) {
       yield LoadingState();
       try {
-        _userCredential =
-            await _userRepository.verifyAndLogin(verID, event.otp);
+        _userCredential = await _userRepository.verifyAndLogin(verID, event.otp);
         if (_userCredential.user != null) {
           yield LogInCompleteState(_userCredential.user);
         } else {
@@ -53,13 +52,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       }
     } else if (event is UploadDetailsEvent) {
       yield LoadingState();
-      await _userRepository.uploadUserDetails(
-          user: _userDetails,
-          name: event.name,
-          email: event.email,
-          phoneNumber: _userCredential.user.phoneNumber,
-          gender: event.gender,
-          image: event.image);
+      await _userRepository.uploadUserDetails(user: _userDetails, name: event.name, email: event.email, phoneNumber: _userCredential.user.phoneNumber, gender: event.gender, image: event.image);
       yield RegistrationCompleteState(_userCredential.user);
     } else if (event is LoadHotelDetailsEvent) {
       yield* _mapLoadHomePageEventToState(event);
@@ -99,8 +92,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         eventStream.close();
       });
     };
-    final PhoneVerificationFailed =
-        (FirebaseAuthException firebaseAuthException) {
+    final PhoneVerificationFailed = (FirebaseAuthException firebaseAuthException) {
       print(firebaseAuthException.message);
       eventStream.add(LogInExceptionEvent(onError.toString()));
       eventStream.close();
@@ -116,13 +108,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       eventStream.close();
     };
 
-    await _userRepository.sendOTP(
-        phoNo,
-        Duration(seconds: 1),
-        PhoneVerificationCompleted,
-        PhoneVerificationFailed,
-        PhoneCodeSent,
-        PhoneCodeAutoRetrievalTimeout);
+    await _userRepository.sendOTP(phoNo, Duration(seconds: 1), PhoneVerificationCompleted, PhoneVerificationFailed, PhoneCodeSent, PhoneCodeAutoRetrievalTimeout);
     yield* eventStream.stream;
   }
 
