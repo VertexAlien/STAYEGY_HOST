@@ -10,7 +10,18 @@ import 'package:stayegy_host/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy_host/bloc/Repository/hotel.dart';
 import 'package:stayegy_host/container/loading_Overlay.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String valueChoose;
+  List listItem = [
+    "Today",
+    "Tomorrow",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,37 +113,48 @@ class HomePage extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
+                                          Text('Date'),
                                           Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            color: Color(0xffefefef),
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 60,
-                                            child: Text(
-                                                'New booking request from Mr.xyz ',
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                              top: 20,
-                                            ),
                                             padding: EdgeInsets.only(
-                                                left: 10, top: 10),
-                                            color: Color(0xffefefef),
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 60,
-                                            child: Text(
-                                                'Sami-dual bed || AC (2 days)    ',
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.normal)),
+                                                left: 16, right: 24),
+                                            decoration: BoxDecoration(
+                                                color: Color(0xffefefef)),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton(
+                                                dropdownColor: Colors.grey,
+                                                icon: Icon(Icons.arrow_right),
+                                                iconSize: 35,
+                                                isExpanded: true,
+                                                style: TextStyle(
+                                                  fontSize: 22,
+                                                ),
+                                                value: valueChoose,
+                                                onChanged: (newValue) {
+                                                  setState(() {
+                                                    valueChoose = newValue;
+                                                  });
+                                                },
+                                                items:
+                                                    listItem.map((valueItem) {
+                                                  return DropdownMenuItem(
+                                                    value: valueItem,
+                                                    child: Center(
+                                                      child: Text(
+                                                        valueItem,
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color:
+                                                              Color(0xFF110B0B),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
                                           ),
                                         ]),
                                   ),

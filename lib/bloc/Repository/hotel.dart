@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Hotel {
   String hid;
   String name;
