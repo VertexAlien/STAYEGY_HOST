@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stayegy_host/UI/login_otp.dart';
+
 import 'package:stayegy_host/bloc/FormBloc/Form_Bloc.dart';
 import 'package:stayegy_host/bloc/FormBloc/Form_Events.dart';
 import 'package:stayegy_host/bloc/FormBloc/Form_States.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
+
+import 'login_otp.dart';
 
 class login_page extends StatefulWidget {
   @override
@@ -37,8 +39,7 @@ class _login_pageState extends State<login_page> {
             ),
             SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height / 2),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
                 height: 358,
                 padding: EdgeInsets.fromLTRB(30, 150, 30, 150),
                 child: Container(
@@ -74,12 +75,9 @@ class _login_pageState extends State<login_page> {
                           padding: EdgeInsets.only(left: 10),
                           child: TextField(
                             keyboardType: TextInputType.phone,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                             onChanged: (value) {
-                              formBloc.add(
-                                  PhoneNumberCheckEvent(phoneNumber: value));
+                              formBloc.add(PhoneNumberCheckEvent(phoneNumber: value));
                               _phoneNumber = value;
                             },
 
@@ -111,18 +109,13 @@ class _login_pageState extends State<login_page> {
                                   print('Pressed!456');
                                   if (state is PhoneNumberCheckedState) {
                                     logInBloc.add(
-                                      SendOtpEvent(
-                                          phoNo: '+880' + _phoneNumber),
+                                      SendOtpEvent(phoNo: '+880' + _phoneNumber),
                                     );
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => login_otp()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => login_otp()));
                                   }
                                 },
                                 child: Image(
-                                  image: AssetImage(state
-                                          is PhoneNumberNotCheckedState
+                                  image: AssetImage(state is PhoneNumberNotCheckedState
                                       ? 'images/arrow button default.png'
                                       : state is PhoneNumberCheckedState
                                           ? 'images/arrow button submit.png'

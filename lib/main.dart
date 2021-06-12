@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stayegy_host/UI/Splash_Page.dart';
-import 'package:stayegy_host/UI/home_page.dart';
-import 'package:stayegy_host/UI/login_page.dart';
+
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy_host/bloc/Repository/User_Details.dart';
 
+import 'Screen/Splash_Page.dart';
+import 'Screen/home_page.dart';
+import 'Screen/login_page.dart';
 import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'bloc/FormBloc/Form_Bloc.dart';
@@ -24,14 +25,9 @@ void main() async {
       value: userRepository,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthenticationBloc>(
-              create: (context) =>
-                  AuthenticationBloc(userRepository: userRepository)
-                    ..add(AppStarted())),
+          BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc(userRepository: userRepository)..add(AppStarted())),
           BlocProvider<FormBloc>(create: (context) => FormBloc()),
-          BlocProvider<LogInBloc>(
-              create: (context) => LogInBloc(
-                  userRepository: userRepository, userDetails: userDetails)),
+          BlocProvider<LogInBloc>(create: (context) => LogInBloc(userRepository: userRepository, userDetails: userDetails)),
         ],
         child: MyApp(),
       ),

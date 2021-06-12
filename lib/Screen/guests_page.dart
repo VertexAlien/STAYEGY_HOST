@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stayegy_host/UI/booking_confirm_page.dart';
 
-class BookingPage extends StatefulWidget {
+import 'check_out_page.dart';
+
+class GuestsPage extends StatefulWidget {
   @override
-  _BookingPageState createState() => _BookingPageState();
+  _GuestsPageState createState() => _GuestsPageState();
 }
 
-class _BookingPageState extends State<BookingPage> {
+class _GuestsPageState extends State<GuestsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class _BookingPageState extends State<BookingPage> {
         ),
         centerTitle: true,
         title: Text(
-          'Bookings',
+          'Guests',
           style: GoogleFonts.staatliches(
             fontSize: 25,
           ),
@@ -71,10 +72,7 @@ class _BookingPageState extends State<BookingPage> {
                 (context, index) => ListTile(
                   selected: true,
                   title: GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (_) => BookingConfirmPage())),
+                    onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => CheckOutPage())),
                     child: Container(
                       margin: EdgeInsets.only(top: 16),
                       padding: EdgeInsets.fromLTRB(10, 15, 0, 10),
@@ -82,16 +80,8 @@ class _BookingPageState extends State<BookingPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Mr. xyz is staying at Room \$ T007 ',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black)),
-                          Text('Sami-dual bed || AC (2 days)',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black)),
+                          Text('Mr. xyz is staying at Room \$ T007 ', style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.black)),
+                          Text('Sami-dual bed || AC (2 days)', style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.black)),
                         ],
                       ),
                     ),

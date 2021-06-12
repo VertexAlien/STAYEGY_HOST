@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stayegy_host/UI/appdrawer.dart';
+
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy_host/bloc/Repository/hotel.dart';
 import 'package:stayegy_host/container/loading_Overlay.dart';
+
+import 'appdrawer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -70,8 +72,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                       backgroundColor: Colors.black,
                       onRefresh: () {
-                        BlocProvider.of<LogInBloc>(context)
-                            .add(HomePageReloadEvent());
+                        BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
                         return null;
                       },
                       child: CustomScrollView(
@@ -79,25 +80,16 @@ class _HomePageState extends State<HomePage> {
                           SliverFillRemaining(
                             hasScrollBody: true,
                             child: Container(
-                              height: MediaQuery.of(context).size.height -
-                                  AppBar().preferredSize.height,
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
+                              height: MediaQuery.of(context).size.height - AppBar().preferredSize.height,
+                              padding: const EdgeInsets.only(left: 10, right: 10),
                               child: Column(
                                 children: [
                                   Center(
                                     child: Column(
                                       children: [
-                                        Text('${state.hotel.hid}',
-                                            style: GoogleFonts.staatliches(
-                                                fontSize: 35)),
-                                        Text('${state.hotel.name} ',
-                                            style: GoogleFonts.staatliches(
-                                                fontSize: 20)),
-                                        Text('${state.hotel.address}',
-                                            style: GoogleFonts.staatliches(
-                                                fontSize: 12,
-                                                color: Colors.black45)),
+                                        Text('${state.hotel.hid}', style: GoogleFonts.staatliches(fontSize: 35)),
+                                        Text('${state.hotel.name} ', style: GoogleFonts.staatliches(fontSize: 20)),
+                                        Text('${state.hotel.address}', style: GoogleFonts.staatliches(fontSize: 12, color: Colors.black45)),
                                       ],
                                     ),
                                   ),
@@ -107,63 +99,51 @@ class _HomePageState extends State<HomePage> {
                                   Container(
                                     width: MediaQuery.of(context).size.width,
                                     height: 150,
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text('Date'),
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 16, right: 24),
-                                            decoration: BoxDecoration(
-                                                color: Color(0xffefefef)),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton(
-                                                dropdownColor: Colors.grey,
-                                                icon: Icon(Icons.arrow_right),
-                                                iconSize: 35,
-                                                isExpanded: true,
-                                                style: TextStyle(
-                                                  fontSize: 22,
-                                                ),
-                                                value: valueChoose,
-                                                onChanged: (newValue) {
-                                                  setState(() {
-                                                    valueChoose = newValue;
-                                                  });
-                                                },
-                                                items:
-                                                    listItem.map((valueItem) {
-                                                  return DropdownMenuItem(
-                                                    value: valueItem,
-                                                    child: Center(
-                                                      child: Text(
-                                                        valueItem,
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color:
-                                                              Color(0xFF110B0B),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                              ),
+                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
+                                      Text('Date'),
+                                      Container(
+                                        padding: EdgeInsets.only(left: 16, right: 24),
+                                        decoration: BoxDecoration(color: Color(0xffefefef)),
+                                        child: DropdownButtonHideUnderline(
+                                          child: DropdownButton(
+                                            dropdownColor: Colors.grey,
+                                            icon: Icon(Icons.arrow_right),
+                                            iconSize: 35,
+                                            isExpanded: true,
+                                            style: TextStyle(
+                                              fontSize: 22,
                                             ),
+                                            value: valueChoose,
+                                            onChanged: (newValue) {
+                                              setState(() {
+                                                valueChoose = newValue;
+                                              });
+                                            },
+                                            items: listItem.map((valueItem) {
+                                              return DropdownMenuItem(
+                                                value: valueItem,
+                                                child: Center(
+                                                  child: Text(
+                                                    valueItem,
+                                                    style: GoogleFonts.roboto(
+                                                      fontSize: 15,
+                                                      fontWeight: FontWeight.normal,
+                                                      color: Color(0xFF110B0B),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }).toList(),
                                           ),
-                                        ]),
+                                        ),
+                                      ),
+                                    ]),
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -223,21 +203,16 @@ class _HomePageState extends State<HomePage> {
                                           state.hotel.rooms,
                                           (index) {
                                             return Card(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  3, 5, 3, 5),
-                                              color: state.hotel.closedRooms
-                                                      .contains(index + 1)
+                                              margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
+                                              color: state.hotel.closedRooms.contains(index + 1)
                                                   ? Color(0xffec524b)
-                                                  : state.hotel.bookedRooms
-                                                          .contains(index + 1)
+                                                  : state.hotel.bookedRooms.contains(index + 1)
                                                       ? Color(0xfffff3b2)
                                                       : Color(0xff5aa469),
                                               child: Center(
                                                 child: Text(
                                                   'Room ${index + 1}',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                  style: TextStyle(fontWeight: FontWeight.bold),
                                                 ),
                                               ),
                                             );
