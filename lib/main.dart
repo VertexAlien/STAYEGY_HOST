@@ -12,6 +12,10 @@ import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'bloc/FormBloc/Form_Bloc.dart';
 import 'bloc/Login_Bloc/LogIn_Bloc.dart';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import 'bloc/Repository/UserRepository/UserRepository.dart';
 import 'bloc/Repository/UserRepository/User_Details.dart';
 

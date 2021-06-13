@@ -5,7 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
 import 'package:stayegy_host/bloc/Repository/HotelRepository/hotel.dart';
+<<<<<<< Updated upstream
 import 'package:stayegy_host/bloc/Repository/UserRepository/User_Details.dart';
+=======
+
+import 'User_Details.dart';
+>>>>>>> Stashed changes
 
 class UserRepository {
   final auth.FirebaseAuth _firebaseAuth;
