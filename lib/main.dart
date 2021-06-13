@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
-import 'package:stayegy_host/bloc/Repository/User_Details.dart';
 
 import 'Screen/Splash_Page.dart';
 import 'Screen/home_page.dart';
@@ -13,7 +12,8 @@ import 'bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'bloc/FormBloc/Form_Bloc.dart';
 import 'bloc/Login_Bloc/LogIn_Bloc.dart';
-import 'bloc/Repository/UserRepository.dart';
+import 'bloc/Repository/UserRepository/UserRepository.dart';
+import 'bloc/Repository/UserRepository/User_Details.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

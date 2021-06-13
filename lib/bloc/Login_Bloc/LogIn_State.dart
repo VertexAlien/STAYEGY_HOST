@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:stayegy_host/bloc/Repository/hotel.dart';
+import 'package:stayegy_host/bloc/Repository/HotelRepository/hotel.dart';
 
 abstract class LogInState extends Equatable {
   @override
