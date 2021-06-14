@@ -1,8 +1,4 @@
 import 'package:bloc/bloc.dart';
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 import 'package:stayegy_host/bloc/Repository/UserRepository/UserRepository.dart';
 import 'package:stayegy_host/bloc/Repository/UserRepository/User_Details.dart';
 
