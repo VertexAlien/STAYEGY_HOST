@@ -8,6 +8,7 @@ class PricePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff191919),
       appBar: AppBar(
         elevation: 0.0,
         leading: IconButton(
@@ -18,127 +19,97 @@ class PricePage extends StatelessWidget {
           },
           icon: Icon(
             CupertinoIcons.back,
-            color: Color(0xff191919),
+            // color: Color(0xff191919),
+            color: Colors.white,
             size: 30,
           ),
         ),
-        backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            'Room Type & Price',
-            style: TextStyle(
-              color: Colors.black,
-            ),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text(
+          'Price',
+          style: TextStyle(
+            color: Colors.white,
           ),
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              Container(
-                color: Color(0xEFF8F4F2),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 300,
+                  width: double.maxFinite,
+                  color: Colors.green,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text('AC'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Room price:',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('1200tk',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                color: Color(0xEFF8F4F2),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Single',
-                        textAlign: TextAlign.left,
+                        'AC',
+                        style: TextStyle(fontSize: 30, color: Colors.white),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Room price:',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('1200tk',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                        ],
-                      ),
+                      Text('1200tk',
+                          style: GoogleFonts.roboto(
+                            fontSize: 40,
+                            height: 1.5,
+                            color: Colors.white,
+                          )),
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                color: Color(0xEFF8F4F2),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 300,
+                  width: double.maxFinite,
+                  color: Colors.redAccent,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Semi-Double'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Room price:',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('1200tk',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                        ],
+                      Text(
+                        'Single | AC',
+                        style: TextStyle(fontSize: 30, color: Colors.white),
                       ),
+                      Text('1200tk',
+                          style: GoogleFonts.roboto(
+                            fontSize: 40,
+                            height: 1.5,
+                            color: Colors.white,
+                          )),
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                color: Color(0xEFF8F4F2),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 300,
+                  width: double.maxFinite,
+                  color: Colors.blueAccent,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Double'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Room price:',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('1200tk',
-                              style:
-                                  GoogleFonts.roboto(fontSize: 15, height: 2)),
-                        ],
+                      Text(
+                        'Single | Non AC',
+                        style: TextStyle(fontSize: 30, color: Colors.white),
                       ),
+                      Text('800tk',
+                          style: GoogleFonts.roboto(
+                            fontSize: 40,
+                            height: 1.5,
+                            color: Colors.white,
+                          )),
                     ],
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         ),
       ),
