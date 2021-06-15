@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stayegy_host/bloc/Repository/HotelRepository/hotel.dart';
 import 'package:stayegy_host/bloc/Repository/UserRepository/UserRepository.dart';
 import 'package:stayegy_host/bloc/Repository/UserRepository/User_Details.dart';
+import 'package:stayegy_host/constants/constant.dart';
 
 import 'LogIn_Events.dart';
 import 'LogIn_State.dart';
@@ -114,6 +115,8 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
 
   Stream<LogInState> _mapLoadHomePageEventToState(LogInEvent event) async* {
     Hotel hotel = await _userRepository.getHotelDetails();
+
+    hotelDetailsGlobal = hotel;
 
     yield LoadHotelDetailsCompleteState(hotel: hotel);
   }

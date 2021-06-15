@@ -5,6 +5,8 @@ import 'package:stayegy_host/Screen/price_page.dart';
 
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Events.dart';
+import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
+import 'package:stayegy_host/constants/constant.dart';
 import 'package:stayegy_host/container/drawer_Data.dart';
 
 import 'booking_page.dart';
@@ -22,9 +24,11 @@ class appdrawer extends StatelessWidget {
             Column(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 190, 10),
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  alignment: Alignment.centerLeft,
                   child: Text(
-                    'Mr. XYZ',
+                    hotelDetailsGlobal.name,
+                    overflow: TextOverflow.clip,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -41,6 +45,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Bookings',
                   scale: 8,
                   onTap: () {
+                    BlocProvider.of<LoadingBloc>(context).add(LoadBookings());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingPage()));
                   },
                 ),

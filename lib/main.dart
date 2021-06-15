@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_States.dart';
+import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
+import 'package:stayegy_host/bloc/Repository/BookRepository/BookRepository.dart';
 
 import 'Screen/Splash_Page.dart';
 import 'Screen/home_page.dart';
@@ -20,6 +22,7 @@ void main() async {
   await Firebase.initializeApp();
   final UserRepository userRepository = UserRepository();
   final UserDetails userDetails = UserDetails();
+  final BookRepository bookRepository = BookRepository();
   runApp(
     RepositoryProvider.value(
       value: userRepository,
@@ -27,6 +30,7 @@ void main() async {
         providers: [
           BlocProvider<AuthenticationBloc>(create: (context) => AuthenticationBloc(userRepository: userRepository)..add(AppStarted())),
           BlocProvider<FormBloc>(create: (context) => FormBloc()),
+          BlocProvider<LoadingBloc>(create: (context) => LoadingBloc(bookRepository: bookRepository)),
           BlocProvider<LogInBloc>(create: (context) => LogInBloc(userRepository: userRepository, userDetails: userDetails)),
         ],
         child: MyApp(),

@@ -15,7 +15,7 @@ class BoookingListLoadedState extends LoadingState {
   final List bookedList;
   final List pendingList;
 
-  BoookingListLoadedState({this.bookedList, this.pendingList});
+  BoookingListLoadedState({@required this.bookedList, @required this.pendingList});
 
   @override
   List<Object> get props => [bookedList, pendingList];

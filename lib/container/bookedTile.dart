@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
+import 'package:intl/intl.dart';
 
 class BookedTile extends StatelessWidget {
-  const BookedTile({
-    Key key,
-  }) : super(key: key);
+  final BookDetails bookDetails;
+
+  BookedTile({@required this.bookDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +24,17 @@ class BookedTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Mr. Abu Saif',
+                        bookDetails.userName != null ? bookDetails.userName : 'Mr xyz',
                         style: GoogleFonts.roboto(fontSize: 14, height: 2, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '(01760147561)',
+                        bookDetails.userPhoneNumber != null ? bookDetails.userPhoneNumber : '124587569854',
                         style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                       ),
                     ],
                   ),
                   Text(
-                    '৳520',
+                    bookDetails.totalDiscountedPrice != null ? bookDetails.totalDiscountedPrice.toString() : '0',
                     style: GoogleFonts.roboto(fontSize: 16, height: 2, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -48,7 +50,8 @@ class BookedTile extends StatelessWidget {
                         style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                       ),
                       Text(
-                        'JUNE 20 - JUNE 22',
+                        // '${DateFormat('dd-MM-yy').format(DateTime.fromMicrosecondsSinceEpoch(bookDetails.dateRange["startDate"]))}  -  ${DateFormat('dd-MM-yy').format(DateTime.fromMicrosecondsSinceEpoch(bookDetails.dateRange["endDate"]))}',
+                        'june 3',
                         style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                       )
                     ],
