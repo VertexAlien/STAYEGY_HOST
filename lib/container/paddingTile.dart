@@ -52,7 +52,7 @@ class PendingTile extends StatelessWidget {
                         ),
                         Text(
                           // '${DateFormat('dd-MM-yy').format(DateTime.fromMicrosecondsSinceEpoch(bookDetails.dateRange["startDate"]))}  -  ${DateFormat('dd-MM-yy').format(DateTime.fromMicrosecondsSinceEpoch(bookDetails.dateRange["endDate"]))}',
-                          'june 2',
+                          '${bookDetails.dateRange["startDate"]}',
                           style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                         )
                       ],
