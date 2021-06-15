@@ -50,8 +50,8 @@ class BookedTile extends StatelessWidget {
                         style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                       ),
                       Text(
-                        // '${DateFormat('dd-MM-yy').format(DateTime.fromMicrosecondsSinceEpoch(bookDetails.dateRange["startDate"]))}  -  ${DateFormat('dd-MM-yy').format(DateTime.fromMicrosecondsSinceEpoch(bookDetails.dateRange["endDate"]))}',
-                        'june 3',
+                        '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["endDate"].toDate().toString()))}',
+                        // '${DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString())}',
                         style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                       )
                     ],
