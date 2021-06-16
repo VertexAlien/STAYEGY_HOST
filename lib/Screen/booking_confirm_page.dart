@@ -2,14 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/text.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 
 class BookingConfirmPage extends StatefulWidget {
+  final BookDetails bookDetails;
+
+  BookingConfirmPage({@required this.bookDetails});
   @override
   _BookingConfirmPageState createState() => _BookingConfirmPageState();
 }
 
 class _BookingConfirmPageState extends State<BookingConfirmPage> {
   String valueChoose;
+
   List listItem = ["Room 01", "Room 02", "Room 03", "Room 04", "Room 05", "Room 06", "Room 07", "Room 08", "Room 09", "Room 10", "Room 11", "Room 12", "Room 13", "Room 14", "Room 15", "Room 16", "Room 17", "Room 18", "Room 19", "Room 20", "Room 21", "Room 22", "Room 23", "Room 24", "Room 25", "Room 26", "Room 27", "Room 28", "Room 29", "Room 30"];
   @override
   Widget build(BuildContext context) {
@@ -50,29 +55,29 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Center(
-                            child: Text('MR. XYZ Wants One Room', style: GoogleFonts.roboto(fontSize: 20, height: 2, fontWeight: FontWeight.bold)),
+                            child: Text('${widget.bookDetails.userName} Wants One Room', style: GoogleFonts.roboto(fontSize: 20, height: 2, fontWeight: FontWeight.bold)),
                           ),
-                          Text('Customer:', textAlign: TextAlign.left, style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
-                          Text('Name: Rasel Morshed', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('Phone Number: 0191234567', style: GoogleFonts.roboto(fontSize: 15)),
-                          Text('Details:', style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
-                          Text('Date: 15-12-2021', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('Room Type: Sami-Dual/AC', style: GoogleFonts.roboto(fontSize: 15)),
-                          Text('Rooms:1', style: GoogleFonts.roboto(fontSize: 15)),
+                          Text('Customer :', textAlign: TextAlign.left, style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
+                          Text('Name : ${widget.bookDetails.userName}', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                          Text('Phone Number : ${widget.bookDetails.userPhoneNumber}', style: GoogleFonts.roboto(fontSize: 15)),
+                          Text('Details :', style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
+                          Text('Date : 15-12-2021', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                          Text('Room Type : Sami-Dual/AC', style: GoogleFonts.roboto(fontSize: 15)),
+                          Text('Rooms :  ${widget.bookDetails.selectedRooms.length}', style: GoogleFonts.roboto(fontSize: 15)),
                           Text('Days:2', style: GoogleFonts.roboto(fontSize: 15)),
                           Text('Payment:', style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Room price:', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                              Text('1200tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                              Text('${widget.bookDetails.totalPrice} tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Discount:(20%)', style: GoogleFonts.roboto(fontSize: 15)),
-                              Text('240tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                              Text('${widget.bookDetails.totalDiscountedPrice - widget.bookDetails.totalPrice}tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
                             ],
                           ),
                           Divider(
@@ -83,7 +88,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Total Paid:', style: GoogleFonts.roboto(fontSize: 15)),
-                              Text('960th', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                              Text('${widget.bookDetails.totalDiscountedPrice}tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
                             ],
                           ),
                         ],

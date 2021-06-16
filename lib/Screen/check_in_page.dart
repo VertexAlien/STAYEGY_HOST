@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 
 class CheckInPage extends StatefulWidget {
+  final BookDetails bookDetails;
+
+  CheckInPage({@required this.bookDetails});
   @override
   _CheckInPageState createState() => _CheckInPageState();
 }
@@ -46,58 +50,29 @@ class _CheckInPageState extends State<CheckInPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Center(
-                          child: Text('MR. XYZ Wants to check in',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 20,
-                                  height: 2,
-                                  fontWeight: FontWeight.bold)),
+                          child: Text('${widget.bookDetails.userName} Wants to check in', style: GoogleFonts.roboto(fontSize: 20, height: 2, fontWeight: FontWeight.bold)),
                         ),
-                        Text('Customer:',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.roboto(
-                                fontSize: 20,
-                                height: 3,
-                                fontWeight: FontWeight.bold)),
-                        Text('Name: Rasel Morshed',
-                            style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                        Text('Phone Number: 0191234567',
-                            style: GoogleFonts.roboto(fontSize: 15)),
-                        Text('Details:',
-                            style: GoogleFonts.roboto(
-                                fontSize: 20,
-                                height: 3,
-                                fontWeight: FontWeight.bold)),
-                        Text('Date: 15-12-2021',
-                            style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                        Text('Room Type: Sami-Dual/AC',
-                            style: GoogleFonts.roboto(fontSize: 15)),
-                        Text('Rooms:1',
-                            style: GoogleFonts.roboto(fontSize: 15)),
+                        Text('Customer:', textAlign: TextAlign.left, style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
+                        Text('Name: ${widget.bookDetails.userName}', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                        Text('Phone Number: ${widget.bookDetails.userPhoneNumber}', style: GoogleFonts.roboto(fontSize: 15)),
+                        Text('Details:', style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
+                        Text('Date: 15-12-2021', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                        Text('Room Type: Sami-Dual/AC', style: GoogleFonts.roboto(fontSize: 15)),
+                        Text('Rooms:1', style: GoogleFonts.roboto(fontSize: 15)),
                         Text('Days:2', style: GoogleFonts.roboto(fontSize: 15)),
-                        Text('Payment:',
-                            style: GoogleFonts.roboto(
-                                fontSize: 20,
-                                height: 3,
-                                fontWeight: FontWeight.bold)),
+                        Text('Payment:', style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Room price:',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 15, height: 2)),
-                            Text('1200tk',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 15, height: 2)),
+                            Text('Room price:', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
+                            Text('1200tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Discount:(20%)',
-                                style: GoogleFonts.roboto(fontSize: 15)),
-                            Text('240tk',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 15, height: 2)),
+                            Text('Discount:(20%)', style: GoogleFonts.roboto(fontSize: 15)),
+                            Text('240tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
                           ],
                         ),
                         Divider(
@@ -107,11 +82,8 @@ class _CheckInPageState extends State<CheckInPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Total Paid:',
-                                style: GoogleFonts.roboto(fontSize: 15)),
-                            Text('960th',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 15, height: 2)),
+                            Text('Total Paid:', style: GoogleFonts.roboto(fontSize: 15)),
+                            Text('960th', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
                           ],
                         ),
                       ],

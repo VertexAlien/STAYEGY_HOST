@@ -2,23 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy_host/Screen/check_in_page.dart';
+import 'package:stayegy_host/Screen/check_out_page.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 import 'package:intl/intl.dart';
 
-class BookedTile extends StatelessWidget {
-  final BookDetails bookDetails;
-
-  BookedTile({@required this.bookDetails});
-
+class CheckOutTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          CupertinoPageRoute(
-              builder: (_) => CheckInPage(
-                    bookDetails: bookDetails,
-                  ))),
+      onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => CheckOutPage())),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -33,20 +25,23 @@ class BookedTile extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          bookDetails.userName != null ? bookDetails.userName : 'Mr xyz',
+                          // bookDetails.userName != null ? bookDetails.userName : 'Mr xyz',
+                          'Mr xyz',
                           style: GoogleFonts.roboto(fontSize: 16, height: 2, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           width: 5,
                         ),
                         Text(
-                          bookDetails.userPhoneNumber != null ? "(${bookDetails.userPhoneNumber})" : '124587569854',
+                          // bookDetails.userPhoneNumber != null ? "(${bookDetails.userPhoneNumber})" : '124587569854',
+                          '01754856892',
                           style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                         ),
                       ],
                     ),
                     Text(
-                      bookDetails.totalDiscountedPrice != null ? "৳ ${bookDetails.totalDiscountedPrice.toString()}" : '0',
+                      // bookDetails.totalDiscountedPrice != null ? "৳ ${bookDetails.totalDiscountedPrice.toString()}" : '0',
+                      '৳ 1200',
                       style: GoogleFonts.roboto(fontSize: 16, height: 2, fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -92,8 +87,9 @@ class BookedTile extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["endDate"].toDate().toString()))}',
+                              // '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["endDate"].toDate().toString()))}',
                               // '${DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString())}',
+                              'June 12 - June 15',
                               style: GoogleFonts.roboto(fontSize: 8, height: 1.5, color: Color(0xff6b6b6b)),
                             ),
                           ],
@@ -107,7 +103,7 @@ class BookedTile extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(15, 4, 15, 4),
                           child: Text(
-                            'CHECK IN',
+                            'CHECK OUT',
                             style: GoogleFonts.roboto(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,

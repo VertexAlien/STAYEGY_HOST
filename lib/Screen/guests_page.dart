@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy_host/container/checkOutTile.dart';
 
 import 'check_out_page.dart';
 
@@ -70,24 +71,11 @@ class _GuestsPageState extends State<GuestsPage> {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => ListTile(
+                  contentPadding: EdgeInsets.all(0),
                   selected: true,
-                  title: GestureDetector(
-                    onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => CheckOutPage())),
-                    child: Container(
-                      margin: EdgeInsets.only(top: 16),
-                      padding: EdgeInsets.fromLTRB(10, 15, 0, 10),
-                      color: Color(0xffefefef),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Mr. xyz is staying at Room \$ T007 ', style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.black)),
-                          Text('Sami-dual bed || AC (2 days)', style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.black)),
-                        ],
-                      ),
-                    ),
-                  ),
+                  title: CheckOutTile(),
                 ),
-                childCount: 20,
+                childCount: 5,
               ),
             ),
           ],
