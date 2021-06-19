@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/text.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
+import 'package:stayegy_host/container/bottom_button.dart';
+import 'package:stayegy_host/container/gradient_creation.dart';
 
 class BookingConfirmPage extends StatefulWidget {
   final BookDetails bookDetails;
@@ -15,172 +18,414 @@ class BookingConfirmPage extends StatefulWidget {
 class _BookingConfirmPageState extends State<BookingConfirmPage> {
   String valueChoose;
 
-  List listItem = ["Room 01", "Room 02", "Room 03", "Room 04", "Room 05", "Room 06", "Room 07", "Room 08", "Room 09", "Room 10", "Room 11", "Room 12", "Room 13", "Room 14", "Room 15", "Room 16", "Room 17", "Room 18", "Room 19", "Room 20", "Room 21", "Room 22", "Room 23", "Room 24", "Room 25", "Room 26", "Room 27", "Room 28", "Room 29", "Room 30"];
+  List listItem = [
+    "Room 01",
+    "Room 02",
+    "Room 03",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.black,
-          leading: IconButton(
-            padding: EdgeInsets.only(right: 20),
-            iconSize: 5,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Padding(
-              padding: const EdgeInsets.fromLTRB(18, 0, 0, 0),
-              child: Icon(
-                Icons.arrow_back_ios,
-                size: 25,
-              ),
+          leading: InkWell(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
             ),
           ),
+          elevation: 0.5,
           centerTitle: true,
-          title: Image.asset(
-            'images/stayegy host logo.png',
-            scale: 6,
-            color: Colors.white,
+          title: Text(
+            'REQUESTS',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
+          backgroundColor: Colors.black,
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(
-                            child: Text('${widget.bookDetails.userName} Wants One Room', style: GoogleFonts.roboto(fontSize: 20, height: 2, fontWeight: FontWeight.bold)),
-                          ),
-                          Text('Customer :', textAlign: TextAlign.left, style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
-                          Text('Name : ${widget.bookDetails.userName}', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('Phone Number : ${widget.bookDetails.userPhoneNumber}', style: GoogleFonts.roboto(fontSize: 15)),
-                          Text('Details :', style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
-                          Text('Date : 15-12-2021', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                          Text('Room Type : Sami-Dual/AC', style: GoogleFonts.roboto(fontSize: 15)),
-                          Text('Rooms :  ${widget.bookDetails.selectedRooms.length}', style: GoogleFonts.roboto(fontSize: 15)),
-                          Text('Days:2', style: GoogleFonts.roboto(fontSize: 15)),
-                          Text('Payment:', style: GoogleFonts.roboto(fontSize: 20, height: 3, fontWeight: FontWeight.bold)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Room price:', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                              Text('${widget.bookDetails.totalPrice} tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Discount:(20%)', style: GoogleFonts.roboto(fontSize: 15)),
-                              Text('${widget.bookDetails.totalDiscountedPrice - widget.bookDetails.totalPrice}tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                            ],
-                          ),
-                          Divider(
-                            color: Colors.black,
-                            thickness: 2,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Total Paid:', style: GoogleFonts.roboto(fontSize: 15)),
-                              Text('${widget.bookDetails.totalDiscountedPrice}tk', style: GoogleFonts.roboto(fontSize: 15, height: 2)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 30,
+        body: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
                   child: Column(
                     children: [
-                      Container(
-                        child: Center(
-                          child: Container(
-                            padding: EdgeInsets.only(left: 16, right: 24),
-                            decoration: BoxDecoration(color: Color(0xffefefef)),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                hint: Text('Select Room Number', style: GoogleFonts.roboto(fontSize: 15)),
-                                dropdownColor: Colors.black,
-                                icon: Icon(Icons.arrow_drop_down),
-                                iconSize: 35,
-                                isExpanded: true,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22,
+                      //Information part start
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Customer:',
+                                  style: TextStyle(color: Color(0xff191919), fontSize: 20, fontWeight: FontWeight.bold),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: '',
+                                        style: TextStyle(
+                                          color: Color(0xff191919),
+                                        )),
+                                  ],
                                 ),
-                                value: valueChoose,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    valueChoose = newValue;
-                                  });
-                                },
-                                items: listItem.map((valueItem) {
-                                  return DropdownMenuItem(
-                                    value: valueItem,
-                                    child: Center(
-                                      child: Text(
-                                        valueItem,
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.normal,
-                                          color: Color(0xFFDA2727),
-                                        ),
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Row(
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      text: 'Name:',
+                                      style: TextStyle(
+                                        color: Color(0xff191919),
+                                        fontSize: 16,
                                       ),
                                     ),
-                                  );
-                                }).toList(),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      text: 'Rasel Morshed',
+                                      style: TextStyle(
+                                        color: Color(0xff191919),
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
+                              Row(
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      text: 'Contact Number:',
+                                      style: TextStyle(
+                                        color: Color(0xff191919),
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      text: '0191234567',
+                                      style: TextStyle(
+                                        color: Color(0xff191919),
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: null,
-                            child: Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              color: Colors.black,
-                              alignment: Alignment.center,
-                              child: Text(
-                                'REJECT',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'images/dot.png',
+                                scale: 11,
+                                fit: BoxFit.fill,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Check In Date 14th February,2021',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Check Out Date 16th February,2021',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    'images/one_box.png',
+                                    scale: 12,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Single | Non AC',
+                                    style: TextStyle(fontSize: 12, height: 1),
+                                  ),
+                                ],
+                              ),
+                              GestureDetector(
+                                onTap: null,
+                                child: Container(
+                                  height: 20,
+                                  width: 60,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Color(0xff6b6b6b),
+                                    ),
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  child: Text(
+                                    'ST012',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                          GestureDetector(
-                            onTap: null,
-                            child: Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              alignment: Alignment.center,
-                              color: Colors.black,
-                              child: Text(
-                                'CONFIRM',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    'images/one_box.png',
+                                    scale: 12,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Single | Non AC',
+                                    style: TextStyle(fontSize: 12, height: 1),
+                                  ),
+                                ],
+                              ),
+                              GestureDetector(
+                                onTap: null,
+                                child: Container(
+                                  height: 20,
+                                  width: 60,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Color(0xff6b6b6b),
+                                    ),
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  child: Text(
+                                    'ST012',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    'images/one_box.png',
+                                    scale: 12,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Single | Non AC',
+                                    style: TextStyle(fontSize: 12, height: 1),
+                                  ),
+                                ],
+                              ),
+                              GestureDetector(
+                                onTap: null,
+                                child: Container(
+                                  height: 20,
+                                  width: 60,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Color(0xff6b6b6b),
+                                    ),
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  child: Text(
+                                    'ST012',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Container(
+                            color: Color(0xffefefef),
+                            child: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child: Column(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Text(
+                                                'Customer pays',
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  height: 2,
+                                                  color: Color(0xff6b6b6b),
+                                                ),
+                                              ),
+                                              Text(
+                                                '৳ 2000',
+                                                style: TextStyle(fontSize: 20, height: 1),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Payment Method',
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Color(0xff6b6b6b),
+                                                ),
+                                              ),
+                                              Text(
+                                                'Pay at Hotel',
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  height: 1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        'Payment Breakdown',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          height: 4,
+                                          color: Color(0xFFA1A1A1),
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Subtotal',
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 10,
+                                              height: 2,
+                                              color: Color(0xff191919),
+                                            ),
+                                          ),
+                                          Text(
+                                            '2300',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              height: 2,
+                                              color: Color(0xff6b6b6b),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Customer Pays',
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 10,
+                                              height: 2,
+                                              color: Color(0xff191919),
+                                            ),
+                                          ),
+                                          Text(
+                                            '200',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              height: 2,
+                                              color: Color(0xff6b6b6b),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'STAYEGY Fee',
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 10,
+                                              height: 2,
+                                              color: Color(0xff191919),
+                                            ),
+                                          ),
+                                          Text(
+                                            '100',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              height: 2,
+                                              color: Color(0xff6b6b6b),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -189,9 +434,55 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                     ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+            Positioned(
+              bottom: 10,
+              right: 1,
+              left: 1,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: null,
+                      child: Container(
+                        height: 50,
+                        width: 190,
+                        color: Colors.black,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'REJECT',
+                          style: GoogleFonts.roboto(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: null,
+                      child: Container(
+                        height: 50,
+                        width: 190,
+                        alignment: Alignment.center,
+                        color: Colors.black,
+                        child: Text(
+                          'CONFIRM',
+                          style: GoogleFonts.roboto(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ));
   }
 }
