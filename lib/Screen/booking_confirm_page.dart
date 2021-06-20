@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
-import 'package:stayegy_host/container/bottom_button.dart';
-import 'package:stayegy_host/container/gradient_creation.dart';
 
 class BookingConfirmPage extends StatefulWidget {
   final BookDetails bookDetails;
@@ -16,12 +14,27 @@ class BookingConfirmPage extends StatefulWidget {
 }
 
 class _BookingConfirmPageState extends State<BookingConfirmPage> {
-  String valueChoose;
+  String _dropDownValue;
 
-  List listItem = [
-    "Room 01",
-    "Room 02",
-    "Room 03",
+  final List<String> listItem = <String>[
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
+    "ST01",
   ];
   @override
   Widget build(BuildContext context) {
@@ -39,7 +52,11 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
           centerTitle: true,
           title: Text(
             'REQUESTS',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: GoogleFonts.roboto(
+              fontSize: 24,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           backgroundColor: Colors.black,
         ),
@@ -187,27 +204,42 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   ),
                                 ],
                               ),
-                              GestureDetector(
-                                onTap: null,
-                                child: Container(
-                                  height: 20,
-                                  width: 60,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Color(0xff6b6b6b),
-                                    ),
-                                    borderRadius: BorderRadius.circular(4.0),
+                              Container(
+                                height: 20,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color(0xff6b6b6b),
                                   ),
-                                  child: Text(
-                                    'ST012',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                    ),
-                                  ),
+                                  borderRadius: BorderRadius.circular(4.0),
                                 ),
-                              ),
+                                child: DropdownButton<String>(
+                                  iconDisabledColor: Colors.white,
+                                  hint: _dropDownValue == null
+                                      ? Center(child: Text('Dropdown'))
+                                      : Text(
+                                          _dropDownValue,
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                  isExpanded: true,
+                                  items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(
+                                      () {
+                                        _dropDownValue = value;
+                                      },
+                                    );
+                                  },
+                                ),
+                              )
                             ],
                           ),
                           SizedBox(
@@ -232,27 +264,42 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   ),
                                 ],
                               ),
-                              GestureDetector(
-                                onTap: null,
-                                child: Container(
-                                  height: 20,
-                                  width: 60,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Color(0xff6b6b6b),
-                                    ),
-                                    borderRadius: BorderRadius.circular(4.0),
+                              Container(
+                                height: 20,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color(0xff6b6b6b),
                                   ),
-                                  child: Text(
-                                    'ST012',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                    ),
-                                  ),
+                                  borderRadius: BorderRadius.circular(4.0),
                                 ),
-                              ),
+                                child: DropdownButton<String>(
+                                  iconDisabledColor: Colors.white,
+                                  hint: _dropDownValue == null
+                                      ? Center(child: Text('Dropdown'))
+                                      : Text(
+                                          _dropDownValue,
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                  isExpanded: true,
+                                  items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(
+                                      () {
+                                        _dropDownValue = value;
+                                      },
+                                    );
+                                  },
+                                ),
+                              )
                             ],
                           ),
                           SizedBox(
@@ -277,27 +324,42 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   ),
                                 ],
                               ),
-                              GestureDetector(
-                                onTap: null,
-                                child: Container(
-                                  height: 20,
-                                  width: 60,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Color(0xff6b6b6b),
-                                    ),
-                                    borderRadius: BorderRadius.circular(4.0),
+                              Container(
+                                height: 20,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color(0xff6b6b6b),
                                   ),
-                                  child: Text(
-                                    'ST012',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                    ),
-                                  ),
+                                  borderRadius: BorderRadius.circular(4.0),
                                 ),
-                              ),
+                                child: DropdownButton<String>(
+                                  iconDisabledColor: Colors.white,
+                                  hint: _dropDownValue == null
+                                      ? Center(child: Text('Dropdown'))
+                                      : Text(
+                                          _dropDownValue,
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                  isExpanded: true,
+                                  items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(
+                                      () {
+                                        _dropDownValue = value;
+                                      },
+                                    );
+                                  },
+                                ),
+                              )
                             ],
                           ),
                           SizedBox(
