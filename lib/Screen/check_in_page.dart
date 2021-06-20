@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
@@ -96,14 +97,10 @@ class _CheckInPageState extends State<CheckInPage> {
                               ),
                               Row(
                                 children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Name:',
-                                      style: TextStyle(
-                                        color: Color(0xff191919),
-                                        fontSize: 16,
-                                      ),
-                                    ),
+                                  Icon(
+                                    CupertinoIcons.person_fill,
+                                    color: Colors.black,
+                                    size: 20,
                                   ),
                                   SizedBox(
                                     width: 5,
@@ -119,16 +116,15 @@ class _CheckInPageState extends State<CheckInPage> {
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Row(
                                 children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Contact Number:',
-                                      style: TextStyle(
-                                        color: Color(0xff191919),
-                                        fontSize: 16,
-                                      ),
-                                    ),
+                                  Icon(
+                                    CupertinoIcons.phone_fill,
+                                    color: Colors.black,
+                                    size: 20,
                                   ),
                                   SizedBox(
                                     width: 5,
@@ -212,31 +208,36 @@ class _CheckInPageState extends State<CheckInPage> {
                                   ),
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
-                                child: DropdownButton<String>(
-                                  iconDisabledColor: Colors.white,
-                                  hint: _dropDownValue == null
-                                      ? Center(child: Text('Dropdown'))
-                                      : Text(
-                                          _dropDownValue,
-                                          style: GoogleFonts.roboto(
-                                            fontSize: 12,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                  isExpanded: true,
-                                  items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(
-                                      () {
-                                        _dropDownValue = value;
+                                child: DropdownButtonHideUnderline(
+                                  child: Center(
+                                    child: DropdownButton<String>(
+                                      iconSize: 0,
+                                      iconDisabledColor: Colors.white,
+                                      hint: _dropDownValue == null
+                                          ? Center(child: Text('Dropdown'))
+                                          : Text(
+                                              _dropDownValue,
+                                              style: GoogleFonts.roboto(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                      isExpanded: true,
+                                      items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: new Text(value),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(
+                                          () {
+                                            _dropDownValue = value;
+                                          },
+                                        );
                                       },
-                                    );
-                                  },
+                                    ),
+                                  ),
                                 ),
                               )
                             ],
@@ -272,31 +273,36 @@ class _CheckInPageState extends State<CheckInPage> {
                                   ),
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
-                                child: DropdownButton<String>(
-                                  iconDisabledColor: Colors.white,
-                                  hint: _dropDownValue == null
-                                      ? Center(child: Text('Dropdown'))
-                                      : Text(
-                                          _dropDownValue,
-                                          style: GoogleFonts.roboto(
-                                            fontSize: 12,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                  isExpanded: true,
-                                  items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(
-                                      () {
-                                        _dropDownValue = value;
+                                child: DropdownButtonHideUnderline(
+                                  child: Center(
+                                    child: DropdownButton<String>(
+                                      iconSize: 0,
+                                      iconDisabledColor: Colors.white,
+                                      hint: _dropDownValue == null
+                                          ? Center(child: Text('Dropdown'))
+                                          : Text(
+                                              _dropDownValue,
+                                              style: GoogleFonts.roboto(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                      isExpanded: true,
+                                      items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: new Text(value),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(
+                                          () {
+                                            _dropDownValue = value;
+                                          },
+                                        );
                                       },
-                                    );
-                                  },
+                                    ),
+                                  ),
                                 ),
                               )
                             ],
@@ -332,31 +338,36 @@ class _CheckInPageState extends State<CheckInPage> {
                                   ),
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
-                                child: DropdownButton<String>(
-                                  iconDisabledColor: Colors.white,
-                                  hint: _dropDownValue == null
-                                      ? Center(child: Text('Dropdown'))
-                                      : Text(
-                                          _dropDownValue,
-                                          style: GoogleFonts.roboto(
-                                            fontSize: 12,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                  isExpanded: true,
-                                  items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(
-                                      () {
-                                        _dropDownValue = value;
+                                child: DropdownButtonHideUnderline(
+                                  child: Center(
+                                    child: DropdownButton<String>(
+                                      iconSize: 0,
+                                      iconDisabledColor: Colors.white,
+                                      hint: _dropDownValue == null
+                                          ? Center(child: Text('Dropdown'))
+                                          : Text(
+                                              _dropDownValue,
+                                              style: GoogleFonts.roboto(
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                      isExpanded: true,
+                                      items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: new Text(value),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(
+                                          () {
+                                            _dropDownValue = value;
+                                          },
+                                        );
                                       },
-                                    );
-                                  },
+                                    ),
+                                  ),
                                 ),
                               )
                             ],
