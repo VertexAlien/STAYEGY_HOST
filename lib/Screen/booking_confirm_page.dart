@@ -53,7 +53,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
           title: Text(
             'REQUESTS',
             style: GoogleFonts.roboto(
-              fontSize: 24,
+              fontSize: 20,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
@@ -79,18 +79,9 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              RichText(
-                                text: TextSpan(
-                                  text: 'Customer:',
-                                  style: TextStyle(color: Color(0xff191919), fontSize: 20, fontWeight: FontWeight.bold),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: '',
-                                        style: TextStyle(
-                                          color: Color(0xff191919),
-                                        )),
-                                  ],
-                                ),
+                              Text(
+                                'Customer:',
+                                style: TextStyle(color: Color(0xff191919), fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 height: 25,
@@ -107,7 +98,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: 'Rasel Morshed',
+                                      text: '${widget.bookDetails.userName}',
                                       style: TextStyle(
                                         color: Color(0xff191919),
                                         fontSize: 16,
@@ -131,7 +122,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: '0191234567',
+                                      text: '${widget.bookDetails.userPhoneNumber}',
                                       style: TextStyle(
                                         color: Color(0xff191919),
                                         fontSize: 16,
@@ -410,7 +401,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                                 ),
                                               ),
                                               Text(
-                                                '৳ 2000',
+                                                '৳ ${widget.bookDetails.totalDiscountedPrice}',
                                                 style: TextStyle(fontSize: 20, height: 1),
                                               ),
                                             ],
@@ -456,7 +447,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                             ),
                                           ),
                                           Text(
-                                            '2300',
+                                            '${widget.bookDetails.totalPrice}',
                                             style: TextStyle(
                                               fontSize: 10,
                                               height: 2,
@@ -477,7 +468,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                             ),
                                           ),
                                           Text(
-                                            '200',
+                                            '${widget.bookDetails.totalDiscountedPrice}',
                                             style: TextStyle(
                                               fontSize: 10,
                                               height: 2,
@@ -532,7 +523,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                       onTap: null,
                       child: Container(
                         height: 50,
-                        width: 190,
+                        width: 170,
                         color: Colors.black,
                         alignment: Alignment.center,
                         child: Text(
@@ -549,7 +540,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                       onTap: null,
                       child: Container(
                         height: 50,
-                        width: 190,
+                        width: 170,
                         alignment: Alignment.center,
                         color: Colors.black,
                         child: Text(
