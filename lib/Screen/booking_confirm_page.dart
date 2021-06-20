@@ -278,35 +278,38 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
                                 child: DropdownButtonHideUnderline(
-                                  child: Center(
-                                    child: DropdownButton<String>(
-                                      iconSize: 0,
-                                      iconDisabledColor: Colors.white,
-                                      hint: _dropDownValue == null
-                                          ? Center(child: Text('Dropdown'))
-                                          : Text(
-                                              _dropDownValue,
-                                              style: GoogleFonts.roboto(
-                                                fontSize: 12,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                      isExpanded: true,
-                                      value: _dropDownValue,
-                                      items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: new Text(value),
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        setState(
-                                          () {
-                                            _dropDownValue = value;
-                                          },
-                                        );
-                                      },
+                                  child: DropdownButton<String>(
+                                    iconSize: 0,
+                                    hint: Center(
+                                      child: Text(
+                                        "Room No",
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                     ),
+                                    isExpanded: true,
+                                    value: _dropDownValue,
+                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Center(
+                                            child: new Text(
+                                          value,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        )),
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      setState(
+                                        () {
+                                          _dropDownValue = value;
+                                        },
+                                      );
+                                    },
                                   ),
                                 ),
                               )
@@ -344,34 +347,38 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
                                 child: DropdownButtonHideUnderline(
-                                  child: Center(
-                                    child: DropdownButton<String>(
-                                      iconSize: 0,
-                                      iconDisabledColor: Colors.white,
-                                      hint: _dropDownValue == null
-                                          ? Center(child: Text('Dropdown'))
-                                          : Text(
-                                              _dropDownValue,
-                                              style: GoogleFonts.roboto(
-                                                fontSize: 12,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                      isExpanded: true,
-                                      items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: new Text(value),
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        setState(
-                                          () {
-                                            _dropDownValue = value;
-                                          },
-                                        );
-                                      },
+                                  child: DropdownButton<String>(
+                                    iconSize: 0,
+                                    hint: Center(
+                                      child: Text(
+                                        "Room No",
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                     ),
+                                    isExpanded: true,
+                                    value: _dropDownValue,
+                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Center(
+                                            child: new Text(
+                                          value,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        )),
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      setState(
+                                        () {
+                                          _dropDownValue = value;
+                                        },
+                                      );
+                                    },
                                   ),
                                 ),
                               )
