@@ -8,7 +8,7 @@ class BookRepository {
   Future<List> getBookedList() async {
     List<BookDetails> bookedList = [];
 
-    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('isAccepted', isEqualTo: true).get();
+    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'booked').get();
 
     print("booked length ${querySnapshot.docs.length}, hid: ${hotelDetailsGlobal.hid}");
     for (int i = 0; i < querySnapshot.docs.length; i++) {
@@ -23,7 +23,7 @@ class BookRepository {
   Future<List> getPendingList() async {
     List<BookDetails> pendingList = [];
 
-    QuerySnapshot pendingSnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('isAccepted', isEqualTo: false).get();
+    QuerySnapshot pendingSnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'pending').get();
     print("pending length ${pendingSnapshot.docs.length} , hid: ${hotelDetailsGlobal.hid}");
     for (int i = 0; i < pendingSnapshot.docs.length; i++) {
       pendingList.add(BookDetails.fromMap(pendingSnapshot.docs[i].data()));

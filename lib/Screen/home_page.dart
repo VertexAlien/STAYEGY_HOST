@@ -200,18 +200,14 @@ class _HomePageState extends State<HomePage> {
                                         // crossAxisSpacing: 15,
                                         // mainAxisSpacing: 0,
                                         children: List.generate(
-                                          state.hotel.rooms,
+                                          state.hotel.rooms.length,
                                           (index) {
                                             return Card(
                                               margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
-                                              color: state.hotel.closedRooms.contains(index + 1)
-                                                  ? Color(0xffec524b)
-                                                  : state.hotel.bookedRooms.contains(index + 1)
-                                                      ? Color(0xfffff3b2)
-                                                      : Color(0xff5aa469),
+                                              color: Color(0xff5aa469),
                                               child: Center(
                                                 child: Text(
-                                                  'Room ${index + 1}',
+                                                  'Room ${state.hotel.rooms.keys.elementAt(index)}',
                                                   style: TextStyle(fontWeight: FontWeight.bold),
                                                 ),
                                               ),

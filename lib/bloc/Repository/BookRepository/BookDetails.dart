@@ -11,8 +11,7 @@ class BookDetails {
   List selectedRooms;
   String uid;
   Map dateRange;
-  bool isAccepted;
-  bool isCheckedIn;
+  String status;
 
   Map<String, dynamic> toJason() => {
         'userName': userName,
@@ -27,8 +26,7 @@ class BookDetails {
         'selectedRooms': selectedRooms,
         'uid': uid,
         'dateRange': dateRange,
-        'isAccepted': isAccepted,
-        'isCheckedIn': isCheckedIn,
+        'status': status,
       };
 
   BookDetails.fromMap(Map<String, dynamic> bookDetailsMap) {
@@ -44,7 +42,6 @@ class BookDetails {
     selectedRooms = bookDetailsMap["selectedRooms"];
     uid = bookDetailsMap["uid"];
     dateRange = bookDetailsMap["dateRange"];
-    isAccepted = bookDetailsMap["isAccepted"];
-    isCheckedIn = bookDetailsMap["isCheckedIn"];
+    status = bookDetailsMap["status"];
   }
 }

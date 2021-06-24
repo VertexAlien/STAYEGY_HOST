@@ -1,19 +1,14 @@
 class Hotel {
   String hid;
   String name;
-  int rooms;
+  Map rooms;
   String address;
-
-  List closedRooms;
-  List bookedRooms;
 
   Map<String, dynamic> toJason() => {
         'hid': hid,
         'name': name,
         'rooms': rooms,
         'address': address,
-        'closedRooms': closedRooms,
-        'bookedRooms': bookedRooms,
       };
 
   Hotel.fromMap(Map<String, dynamic> hotelMap) {
@@ -21,7 +16,5 @@ class Hotel {
     name = hotelMap["name"];
     rooms = hotelMap["rooms"];
     address = hotelMap["address"];
-    closedRooms = hotelMap["closedRooms"];
-    bookedRooms = hotelMap["bookedRooms"];
   }
 }
