@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
+import 'package:stayegy_host/constants/constant.dart';
 
 class BookingConfirmPage extends StatefulWidget {
   final BookDetails bookDetails;
@@ -150,7 +152,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Check In Date 14th February,2021',
+                                    'Check In Date ${DateFormat.yMMMMd().format(DateTime.parse(widget.bookDetails.dateRange["startDate"].toDate().toString()))}',
                                     style: TextStyle(
                                       fontSize: 12,
                                     ),
@@ -159,7 +161,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                     height: 10,
                                   ),
                                   Text(
-                                    'Check Out Date 16th February,2021',
+                                    'Check Out Date ${DateFormat.yMMMMd().format(DateTime.parse(widget.bookDetails.dateRange["endDate"].toDate().toString()))}',
                                     style: TextStyle(
                                       fontSize: 12,
                                     ),
@@ -171,212 +173,90 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                           SizedBox(
                             height: 30,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'images/one_box.png',
-                                    scale: 12,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Single | Non AC',
-                                    style: TextStyle(fontSize: 12, height: 1),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: 20,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xff6b6b6b),
-                                  ),
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    iconSize: 0,
-                                    hint: Center(
-                                      child: Text(
-                                        "Room No",
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    value: _dropDownValue,
-                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Center(
-                                            child: new Text(
-                                          value,
-                                          style: TextStyle(
-                                            fontSize: 12,
+                          LimitedBox(
+                            // height: 150,
+                            // width: double.maxFinite,
+                            // alignment: Alignment.centerLeft,
+                            maxHeight: 150,
+                            maxWidth: double.maxFinite,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: widget.bookDetails.selectedRooms.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            'images/one_box.png',
+                                            scale: 12,
+                                            fit: BoxFit.fill,
                                           ),
-                                        )),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          _dropDownValue = value;
-                                        },
-                                      );
-                                    },
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            '${widget.bookDetails.selectedRooms[index]}',
+                                            style: TextStyle(fontSize: 12, height: 1),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        height: 20,
+                                        width: 60,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Color(0xff6b6b6b),
+                                          ),
+                                          borderRadius: BorderRadius.circular(4.0),
+                                        ),
+                                        child: DropdownButtonHideUnderline(
+                                          child: DropdownButton<String>(
+                                            iconSize: 0,
+                                            hint: Center(
+                                              child: Text(
+                                                "Room No",
+                                                style: GoogleFonts.roboto(
+                                                  fontSize: 12,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                            isExpanded: true,
+                                            value: _dropDownValue,
+                                            items: hotelDetailsGlobal.rooms.keys.map((value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Center(
+                                                    child: new Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                  ),
+                                                )),
+                                              );
+                                            }).toList(),
+                                            onChanged: (value) {
+                                              setState(
+                                                () {
+                                                  _dropDownValue = value;
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                ),
-                              )
-                            ],
+                                );
+                              },
+                            ),
                           ),
                           SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'images/one_box.png',
-                                    scale: 12,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Single | Non AC',
-                                    style: TextStyle(fontSize: 12, height: 1),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: 20,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xff6b6b6b),
-                                  ),
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    iconSize: 0,
-                                    hint: Center(
-                                      child: Text(
-                                        "Room No",
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    value: _dropDownValue,
-                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Center(
-                                            child: new Text(
-                                          value,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        )),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          _dropDownValue = value;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'images/one_box.png',
-                                    scale: 12,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Single | Non AC',
-                                    style: TextStyle(fontSize: 12, height: 1),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: 20,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xff6b6b6b),
-                                  ),
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    iconSize: 0,
-                                    hint: Center(
-                                      child: Text(
-                                        "Room No",
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    value: _dropDownValue,
-                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Center(
-                                            child: new Text(
-                                          value,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        )),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          _dropDownValue = value;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 40,
+                            height: 10,
                           ),
                           Container(
                             color: Color(0xffefefef),
