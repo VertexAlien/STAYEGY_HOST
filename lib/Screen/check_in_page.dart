@@ -178,9 +178,6 @@ class _CheckInPageState extends State<CheckInPage> {
                             ],
                           ),
                           SizedBox(
-                            height: 30,
-                          ),
-                          SizedBox(
                             height: 15,
                           ),
                           Row(
@@ -252,9 +249,6 @@ class _CheckInPageState extends State<CheckInPage> {
                           SizedBox(
                             height: 15,
                           ),
-                          SizedBox(
-                            height: 15,
-                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -320,9 +314,6 @@ class _CheckInPageState extends State<CheckInPage> {
                                 ),
                               )
                             ],
-                          ),
-                          SizedBox(
-                            height: 15,
                           ),
                           SizedBox(
                             height: 15,

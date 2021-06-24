@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy_host/Screen/price_page.dart';
+import 'package:stayegy_host/Screen/room_settings_page.dart';
+import 'package:stayegy_host/Screen/roomstatus.dart';
+import 'package:stayegy_host/Screen/statistics.dart';
 
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Events.dart';
@@ -62,7 +65,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Price',
                   scale: 8,
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(builder: (_) => PricePage()));
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => RoomSettingPage()));
                   },
                 ),
               ],
