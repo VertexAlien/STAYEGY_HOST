@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                                               color: Color(0xff5aa469),
                                               child: Center(
                                                 child: Text(
-                                                  'Room ${state.hotel.rooms.keys.elementAt(index)}',
+                                                  'Room ${state.hotel.rooms[index]}',
                                                   style: TextStyle(fontWeight: FontWeight.bold),
                                                 ),
                                               ),

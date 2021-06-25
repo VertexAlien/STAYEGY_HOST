@@ -227,7 +227,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                             ),
                                             isExpanded: true,
                                             value: _dropDownValue,
-                                            items: hotelDetailsGlobal.rooms.keys.map((value) {
+                                            items: hotelDetailsGlobal.rooms.map((value) {
                                               return DropdownMenuItem<String>(
                                                 value: value,
                                                 child: Center(
