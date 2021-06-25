@@ -20,3 +20,12 @@ class BoookingListLoadedState extends LoadingState {
   @override
   List<Object> get props => [bookedList, pendingList];
 }
+
+class FreeRoomsLoadedState extends LoadingState {
+  final List rooms;
+
+  FreeRoomsLoadedState({@required this.rooms});
+
+  @override
+  List<Object> get props => [rooms];
+}

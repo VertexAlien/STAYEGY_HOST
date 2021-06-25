@@ -30,6 +30,16 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingState> {
       pendingList = await _bookRepository.getPendingList();
 
       yield BoookingListLoadedState(bookedList: bookList, pendingList: pendingList);
+    } else if (event is LoadFreeRoomsEvent) {
+      yield ProccesingState();
+
+      List freeRooms = await _bookRepository.getFreeRooms(event.bookDetails);
+
+      print(freeRooms);
+
+      ///TODO: UI part of this bloc for free rooms
+
+      yield FreeRoomsLoadedState(rooms: freeRooms);
     }
   }
 
