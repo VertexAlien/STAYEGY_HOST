@@ -65,7 +65,23 @@ class appdrawer extends StatelessWidget {
                   textData: 'Price',
                   scale: 8,
                   onTap: () {
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => PricePage()));
+                  },
+                ),
+                drawer_data(
+                  imagePath: 'images/room settings.png',
+                  textData: 'Room Settings',
+                  scale: 10,
+                  onTap: () {
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => RoomSettingPage()));
+                  },
+                ),
+                drawer_data(
+                  imagePath: 'images/statistics.png',
+                  textData: 'Statistic',
+                  scale: 10,
+                  onTap: () {
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => StatisticsPage()));
                   },
                 ),
               ],
