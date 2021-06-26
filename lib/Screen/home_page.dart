@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy_host/Screen/roomstatus.dart';
 
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
@@ -202,13 +203,16 @@ class _HomePageState extends State<HomePage> {
                                         children: List.generate(
                                           state.hotel.rooms.length,
                                           (index) {
-                                            return Card(
-                                              margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
-                                              color: Color(0xff5aa469),
-                                              child: Center(
-                                                child: Text(
-                                                  'Room ${state.hotel.rooms[index]}',
-                                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                            return GestureDetector(
+                                              onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => RoomStatus())),
+                                              child: Card(
+                                                margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
+                                                color: Color(0xff5aa469),
+                                                child: Center(
+                                                  child: Text(
+                                                    'Room ${state.hotel.rooms[index]}',
+                                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                                  ),
                                                 ),
                                               ),
                                             );

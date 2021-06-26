@@ -78,7 +78,7 @@ class appdrawer extends StatelessWidget {
                 ),
                 drawer_data(
                   imagePath: 'images/statistics.png',
-                  textData: 'Statistic',
+                  textData: 'Statistics',
                   scale: 10,
                   onTap: () {
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => StatisticsPage()));
