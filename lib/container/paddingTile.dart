@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy_host/Screen/booking_confirm_page.dart';
+import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 import 'package:intl/intl.dart';
 
@@ -13,12 +15,10 @@ class PendingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          CupertinoPageRoute(
-              builder: (_) => BookingConfirmPage(
-                    bookDetails: bookDetails,
-                  ))),
+      onTap: () {
+        BlocProvider.of<LoadingBloc>(context).add(LoadFreeRoomsEvent(bookDetails: bookDetails));
+        Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingConfirmPage(bookDetails: bookDetails)));
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -60,7 +60,7 @@ class PendingTile extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["endDate"].toDate().toString()))}',
+                              '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.startDate.toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.endDate.toDate().toString()))}',
                               style: GoogleFonts.roboto(fontSize: 12, height: 1, color: Color(0xff6b6b6b)),
                             ),
                           ],

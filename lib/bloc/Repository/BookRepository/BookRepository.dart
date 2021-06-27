@@ -36,7 +36,9 @@ class BookRepository {
   Future<List> getFreeRooms(BookDetails bookDetails) async {
     List bookedRooms = [];
 
-    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNull: false).where('dateRange.' + 'startDate', isGreaterThanOrEqualTo: bookDetails.dateRange["startDate"]).where('dateRange.' + 'endDate', isLessThanOrEqualTo: bookDetails.dateRange["endDate"]).get();
+    // QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).where('startDate', isGreaterThanOrEqualTo: bookDetails.startDate).where('endDate', isLessThanOrEqualTo: bookDetails.endDate).get();
+    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).where('startDate', isGreaterThanOrEqualTo: bookDetails.startDate).get();
+
     print("freerooms length ${querySnapshot.docs.length}");
     for (int i = 0; i < querySnapshot.docs.length; i++) {
       bookedRooms.add(querySnapshot.docs[i].data()['bookedRooms']);

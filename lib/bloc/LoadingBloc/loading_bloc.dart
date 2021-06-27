@@ -10,7 +10,7 @@ import 'package:stayegy_host/constants/constant.dart';
 part 'loading_event.dart';
 part 'loading_state.dart';
 
-class LoadingBloc extends Bloc<LoadingEvent, LoadingState> {
+class LoadingBloc extends Bloc<LoadingEvent, LoadingBlocState> {
   final BookRepository _bookRepository;
 
   LoadingBloc({@required BookRepository bookRepository})
@@ -19,7 +19,7 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingState> {
         super(LoadingInitial());
 
   @override
-  Stream<LoadingState> mapEventToState(LoadingEvent event) async* {
+  Stream<LoadingBlocState> mapEventToState(LoadingEvent event) async* {
     if (event is LoadBookings) {
       yield ProccesingState();
 
@@ -36,8 +36,6 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingState> {
       List freeRooms = await _bookRepository.getFreeRooms(event.bookDetails);
 
       print(freeRooms);
-
-      ///TODO: UI part of this bloc for free rooms
 
       yield FreeRoomsLoadedState(rooms: freeRooms);
     }

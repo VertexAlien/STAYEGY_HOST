@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class BookDetails {
   String userName;
   String userPhoneNumber;
@@ -10,7 +12,8 @@ class BookDetails {
   List roomsPrice;
   List selectedRooms;
   String uid;
-  Map dateRange;
+  Timestamp startDate;
+  Timestamp endDate;
   String status;
 
   Map<String, dynamic> toJason() => {
@@ -25,7 +28,8 @@ class BookDetails {
         'roomsPrice': roomsPrice,
         'selectedRooms': selectedRooms,
         'uid': uid,
-        'dateRange': dateRange,
+        'startDate': startDate,
+        'endDate': endDate,
         'status': status,
       };
 
@@ -41,7 +45,8 @@ class BookDetails {
     roomsPrice = bookDetailsMap["roomsPrice"];
     selectedRooms = bookDetailsMap["selectedRooms"];
     uid = bookDetailsMap["uid"];
-    dateRange = bookDetailsMap["dateRange"];
+    startDate = bookDetailsMap["startDate"];
+    endDate = bookDetailsMap["endDate"];
     status = bookDetailsMap["status"];
   }
 }

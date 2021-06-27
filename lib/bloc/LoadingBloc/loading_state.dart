@@ -1,17 +1,17 @@
 part of 'loading_bloc.dart';
 
-abstract class LoadingState extends Equatable {
-  const LoadingState();
+abstract class LoadingBlocState extends Equatable {
+  const LoadingBlocState();
 
   @override
   List<Object> get props => [];
 }
 
-class LoadingInitial extends LoadingState {}
+class LoadingInitial extends LoadingBlocState {}
 
-class ProccesingState extends LoadingState {}
+class ProccesingState extends LoadingBlocState {}
 
-class BoookingListLoadedState extends LoadingState {
+class BoookingListLoadedState extends LoadingBlocState {
   final List bookedList;
   final List pendingList;
 
@@ -21,7 +21,7 @@ class BoookingListLoadedState extends LoadingState {
   List<Object> get props => [bookedList, pendingList];
 }
 
-class FreeRoomsLoadedState extends LoadingState {
+class FreeRoomsLoadedState extends LoadingBlocState {
   final List rooms;
 
   FreeRoomsLoadedState({@required this.rooms});

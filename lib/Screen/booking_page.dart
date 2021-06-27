@@ -75,7 +75,7 @@ class _BookingPageState extends State<BookingPage> {
             ],
           ),
         ),
-        body: BlocListener<LoadingBloc, LoadingState>(
+        body: BlocListener<LoadingBloc, LoadingBlocState>(
           listener: (context, state) {
             if (state is ProccesingState) {
               LoadingOverlay().build(context);
@@ -84,7 +84,7 @@ class _BookingPageState extends State<BookingPage> {
               pendingList = state.pendingList;
             }
           },
-          child: BlocBuilder<LoadingBloc, LoadingState>(
+          child: BlocBuilder<LoadingBloc, LoadingBlocState>(
             builder: (context, state) {
               return TabBarView(children: [
                 state is BoookingListLoadedState

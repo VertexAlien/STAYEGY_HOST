@@ -92,7 +92,7 @@ class BookedTile extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["endDate"].toDate().toString()))}',
+                              '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.startDate.toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.endDate.toDate().toString()))}',
                               // '${DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString())}',
                               style: GoogleFonts.roboto(fontSize: 8, height: 1.5, color: Color(0xff6b6b6b)),
                             ),
