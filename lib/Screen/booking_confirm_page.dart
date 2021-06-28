@@ -22,6 +22,9 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
   String _dropDownValue;
   List freeRooms = [];
 
+  List bookedRooms;
+  String roomType1, roomType2, roomType3;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -219,7 +222,11 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                                 ),
                                               ),
                                               isExpanded: true,
-                                              value: _dropDownValue,
+                                              value: index == 0
+                                                  ? roomType1
+                                                  : index == 1
+                                                      ? roomType2
+                                                      : roomType3,
                                               items: hotelDetailsGlobal.rooms.map((value) {
                                                 return DropdownMenuItem<String>(
                                                   value: value,
@@ -235,7 +242,13 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                               onChanged: (value) {
                                                 setState(
                                                   () {
-                                                    _dropDownValue = value;
+                                                    if (index == 0) {
+                                                      roomType1 = value;
+                                                    } else if (index == 1) {
+                                                      roomType2 = value;
+                                                    } else if (index == 2) {
+                                                      roomType3 = value;
+                                                    }
                                                   },
                                                 );
                                               },
@@ -362,7 +375,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                               ),
                                             ),
                                             Text(
-                                              '100',
+                                              '${((widget.bookDetails.totalPrice * 0.2) - (widget.bookDetails.totalPrice - widget.bookDetails.totalDiscountedPrice)).toInt()}',
                                               style: TextStyle(
                                                 fontSize: 10,
                                                 height: 2,
