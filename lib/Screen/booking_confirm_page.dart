@@ -52,6 +52,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
               LoadingOverlay().build(context);
             } else if (state is FreeRoomsLoadedState) {
               freeRooms = state.rooms;
+              Navigator.pop(context);
             }
           },
           child: Stack(

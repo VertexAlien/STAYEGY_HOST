@@ -36,13 +36,20 @@ class BookRepository {
   Future<List> getFreeRooms(BookDetails bookDetails) async {
     List bookedRooms = [];
 
+    print(bookDetails.startDate);
+    print(bookDetails.endDate);
+    print(Timestamp.fromMillisecondsSinceEpoch(bookDetails.startDate.seconds));
+    print(Timestamp.fromMillisecondsSinceEpoch(bookDetails.endDate.seconds));
     // QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).where('startDate', isGreaterThanOrEqualTo: bookDetails.startDate).where('endDate', isLessThanOrEqualTo: bookDetails.endDate).get();
     QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).where('startDate', isGreaterThanOrEqualTo: bookDetails.startDate).get();
+    // QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).get();
 
     print("freerooms length ${querySnapshot.docs.length}");
     for (int i = 0; i < querySnapshot.docs.length; i++) {
-      bookedRooms.add(querySnapshot.docs[i].data()['bookedRooms']);
-      print(bookedRooms);
+      if (querySnapshot.docs[i].data()['endDate'].toDate().isBefore(bookDetails.endDate.toDate())) {
+        bookedRooms.add(querySnapshot.docs[i].data()['bookedRooms']);
+        print(bookedRooms);
+      }
     }
 
     Set setbooked = Set.from(bookedRooms);

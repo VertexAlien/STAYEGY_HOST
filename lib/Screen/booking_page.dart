@@ -87,8 +87,9 @@ class _BookingPageState extends State<BookingPage> {
           child: BlocBuilder<LoadingBloc, LoadingBlocState>(
             builder: (context, state) {
               return TabBarView(children: [
-                state is BoookingListLoadedState
-                    ? Container(
+                state is ProccesingState
+                    ? LoadingOverlay().buildWidget(context)
+                    : Container(
                         child: Column(
                           children: [
                             Center(
@@ -136,18 +137,17 @@ class _BookingPageState extends State<BookingPage> {
                             ),
                           ],
                         ),
-                      )
-                    : LoadingOverlay().buildWidget(context),
-                state is BoookingListLoadedState
-                    ? ListView.builder(
+                      ),
+                state is ProccesingState
+                    ? LoadingOverlay().buildWidget(context)
+                    : ListView.builder(
                         itemCount: pendingList.length,
                         itemBuilder: (context, index) {
                           return PendingTile(
                             bookDetails: pendingList[index],
                           );
                         },
-                      )
-                    : LoadingOverlay().buildWidget(context),
+                      ),
               ]);
             },
           ),
