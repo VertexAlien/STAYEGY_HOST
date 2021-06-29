@@ -38,6 +38,14 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingBlocState> {
       print(freeRooms);
 
       yield FreeRoomsLoadedState(rooms: freeRooms);
+    } else if (event is ConfirmBookEvent) {
+      yield ProccesingState();
+
+      if (await _bookRepository.confirmBooking(event.bookDetails)) {
+        yield RoomConfirmedState();
+      } else {
+        yield RoomConfirmedFailedState();
+      }
     }
   }
 

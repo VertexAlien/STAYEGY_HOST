@@ -35,26 +35,45 @@ class BookRepository {
 
   Future<List> getFreeRooms(BookDetails bookDetails) async {
     List bookedRooms = [];
+    List output = [];
 
-    print(bookDetails.startDate);
-    print(bookDetails.endDate);
     print(Timestamp.fromMillisecondsSinceEpoch(bookDetails.startDate.seconds));
     print(Timestamp.fromMillisecondsSinceEpoch(bookDetails.endDate.seconds));
-    // QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).where('startDate', isGreaterThanOrEqualTo: bookDetails.startDate).where('endDate', isLessThanOrEqualTo: bookDetails.endDate).get();
-    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).where('startDate', isGreaterThanOrEqualTo: bookDetails.startDate).get();
-    // QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('bookedRooms', isNotEqualTo: null).get();
 
-    print("freerooms length ${querySnapshot.docs.length}");
+    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'booked').where('endDate', isGreaterThanOrEqualTo: bookDetails.startDate).get();
+
+    print("bookedrooms length ${querySnapshot.docs.length}");
     for (int i = 0; i < querySnapshot.docs.length; i++) {
-      if (querySnapshot.docs[i].data()['endDate'].toDate().isBefore(bookDetails.endDate.toDate())) {
+      print(querySnapshot.docs[i].data()['startDate'].toDate());
+      print(bookDetails.endDate.toDate());
+
+      if (querySnapshot.docs[i].data()['startDate'].toDate().isBefore(bookDetails.endDate.toDate())) {
         bookedRooms.add(querySnapshot.docs[i].data()['bookedRooms']);
         print(bookedRooms);
+        print('executed');
       }
     }
 
-    Set setbooked = Set.from(bookedRooms);
-    Set setAll = Set.from(hotelDetailsGlobal.rooms);
+    hotelDetailsGlobal.rooms.forEach((element) {
+      if (bookedRooms.contains(element)) {
+        output.add(element);
+      }
+    });
 
-    return List.from(setAll.difference(setbooked));
+    print('freerooms $output');
+
+    return output;
+  }
+
+  Future<bool> confirmBooking(BookDetails bookDetails) async {
+    final documentReference = await db.collection("bookings").where("bid", isEqualTo: bookDetails.bid).get();
+    print(documentReference.docs.first.id);
+    if (documentReference.docs.isNotEmpty) {
+      print(documentReference.docs.first.id);
+      await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
+      return true;
+    } else {
+      return false;
+    }
   }
 }

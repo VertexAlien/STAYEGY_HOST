@@ -8,6 +8,7 @@ import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
 
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 import 'package:stayegy_host/constants/constant.dart';
+import 'package:stayegy_host/container/SnackBar.dart';
 import 'package:stayegy_host/container/loading_Overlay.dart';
 
 class BookingConfirmPage extends StatefulWidget {
@@ -19,7 +20,6 @@ class BookingConfirmPage extends StatefulWidget {
 }
 
 class _BookingConfirmPageState extends State<BookingConfirmPage> {
-  String _dropDownValue;
   List freeRooms = [];
 
   List bookedRooms;
@@ -56,6 +56,16 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
             } else if (state is FreeRoomsLoadedState) {
               freeRooms = state.rooms;
               Navigator.pop(context);
+            } else if (state is RoomConfirmedState) {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            } else if (state is RoomConfirmedFailedState) {
+              Navigator.pop(context);
+
+              SnackBarBuilder().buildSnackBar(
+                context,
+                message: "Room Book Failed!",
+                color: Colors.red,
+              );
             }
           },
           child: Stack(
@@ -227,7 +237,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                                   : index == 1
                                                       ? roomType2
                                                       : roomType3,
-                                              items: hotelDetailsGlobal.rooms.map((value) {
+                                              items: freeRooms.map((value) {
                                                 return DropdownMenuItem<String>(
                                                   value: value,
                                                   child: Center(
@@ -423,7 +433,6 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: null,
                         child: Container(
                           height: 50,
                           width: 170,
@@ -438,6 +447,88 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                             ),
                           ),
                         ),
+                        onTap: () {
+                          bool isConfirmed = false;
+                          switch (widget.bookDetails.selectedRooms.length) {
+                            case 1:
+                              if (roomType1 != null) {
+                                bookedRooms = [];
+
+                                bookedRooms.add(roomType1);
+                                isConfirmed = true;
+                              } else {
+                                SnackBarBuilder().buildSnackBar(
+                                  context,
+                                  message: "Room Type Not Selected!",
+                                  color: Colors.red,
+                                );
+                              }
+                              break;
+                            case 2:
+                              if (roomType1 != null && roomType2 != null) {
+                                bookedRooms = [];
+
+                                if (roomType1 != roomType2) {
+                                  bookedRooms.addAll([roomType1, roomType2]);
+                                  isConfirmed = true;
+                                } else {
+                                  SnackBarBuilder().buildSnackBar(
+                                    context,
+                                    message: "Room No. can not be same!",
+                                    color: Colors.red,
+                                  );
+                                }
+                              } else {
+                                SnackBarBuilder().buildSnackBar(
+                                  context,
+                                  message: "Room No. not Selected!",
+                                  color: Colors.red,
+                                );
+                              }
+                              break;
+                            case 3:
+                              if (roomType1 != null && roomType2 != null && roomType3 != null) {
+                                bookedRooms = [];
+
+                                if (roomType1 != roomType2 && roomType1 != roomType3 && roomType2 != roomType3) {
+                                  bookedRooms.addAll([roomType1, roomType2, roomType3]);
+                                  isConfirmed = true;
+                                } else {
+                                  SnackBarBuilder().buildSnackBar(
+                                    context,
+                                    message: "Room No. can not be same!",
+                                    color: Colors.red,
+                                  );
+                                }
+                              } else {
+                                SnackBarBuilder().buildSnackBar(
+                                  context,
+                                  message: "Room No. not Selected!",
+                                  color: Colors.red,
+                                );
+                              }
+                              break;
+                            default:
+                              SnackBarBuilder().buildSnackBar(
+                                context,
+                                message: "Room Selection Error!",
+                                color: Colors.red,
+                              );
+                          }
+
+                          if (isConfirmed) {
+                            widget.bookDetails.status = 'booked';
+                            widget.bookDetails.bookedRooms = bookedRooms;
+
+                            BlocProvider.of<LoadingBloc>(context).add(ConfirmBookEvent(bookDetails: widget.bookDetails));
+
+                            SnackBarBuilder().buildSnackBar(
+                              context,
+                              message: "Room Booked!",
+                              color: Colors.green,
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

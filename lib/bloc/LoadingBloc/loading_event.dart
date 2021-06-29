@@ -17,3 +17,12 @@ class LoadFreeRoomsEvent extends LoadingEvent {
   @override
   List<Object> get props => [bookDetails];
 }
+
+class ConfirmBookEvent extends LoadingEvent {
+  final BookDetails bookDetails;
+
+  ConfirmBookEvent({@required this.bookDetails});
+
+  @override
+  List<Object> get props => [bookDetails];
+}

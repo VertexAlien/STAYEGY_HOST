@@ -29,3 +29,7 @@ class FreeRoomsLoadedState extends LoadingBlocState {
   @override
   List<Object> get props => [rooms];
 }
+
+class RoomConfirmedState extends LoadingBlocState {}
+
+class RoomConfirmedFailedState extends LoadingBlocState {}

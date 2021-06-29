@@ -15,6 +15,7 @@ class BookDetails {
   Timestamp startDate;
   Timestamp endDate;
   String status;
+  List bookedRooms;
 
   Map<String, dynamic> toJason() => {
         'userName': userName,
@@ -31,6 +32,7 @@ class BookDetails {
         'startDate': startDate,
         'endDate': endDate,
         'status': status,
+        'bookedRooms': bookedRooms,
       };
 
   BookDetails.fromMap(Map<String, dynamic> bookDetailsMap) {
@@ -48,5 +50,6 @@ class BookDetails {
     startDate = bookDetailsMap["startDate"];
     endDate = bookDetailsMap["endDate"];
     status = bookDetailsMap["status"];
+    bookedRooms = bookDetailsMap["bookedRooms"];
   }
 }
