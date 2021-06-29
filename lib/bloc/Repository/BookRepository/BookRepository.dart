@@ -37,9 +37,6 @@ class BookRepository {
     List bookedRooms = [];
     List output = [];
 
-    print(Timestamp.fromMillisecondsSinceEpoch(bookDetails.startDate.seconds));
-    print(Timestamp.fromMillisecondsSinceEpoch(bookDetails.endDate.seconds));
-
     QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'booked').where('endDate', isGreaterThanOrEqualTo: bookDetails.startDate).get();
 
     print("bookedrooms length ${querySnapshot.docs.length}");
@@ -47,9 +44,16 @@ class BookRepository {
       print(querySnapshot.docs[i].data()['startDate'].toDate());
       print(bookDetails.endDate.toDate());
 
-      if (querySnapshot.docs[i].data()['startDate'].toDate().isBefore(bookDetails.endDate.toDate())) {
+      if (querySnapshot.docs[i].data()['startDate'].toDate().isBefore(bookDetails.endDate.toDate()) || querySnapshot.docs[i].data()['endDate'].toDate() == bookDetails.startDate.toDate()) {
         bookedRooms.add(querySnapshot.docs[i].data()['bookedRooms']);
-        print(bookedRooms);
+        if (querySnapshot.docs[i].data()['endDate'].toDate() == bookDetails.startDate.toDate()) {
+          List templist = querySnapshot.docs[i].data()['bookedRooms'];
+          templist.forEach((element) {
+            output.add(element);
+          });
+          print('freerooms same date $output');
+        }
+        print('booked rooms $bookedRooms');
         print('executed');
       }
     }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
+import 'package:intl/intl.dart';
 
 class CheckInPage extends StatefulWidget {
   final BookDetails bookDetails;
@@ -13,6 +14,8 @@ class CheckInPage extends StatefulWidget {
 
 class _CheckInPageState extends State<CheckInPage> {
   String _dropDownValue;
+
+  String roomType1, roomType2, roomType3;
 
   final List<String> listItem = <String>[
     "ST01",
@@ -107,7 +110,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: 'Rasel Morshed',
+                                      text: widget.bookDetails.userName,
                                       style: TextStyle(
                                         color: Color(0xff191919),
                                         fontSize: 16,
@@ -131,7 +134,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: '0191234567',
+                                      text: widget.bookDetails.userPhoneNumber,
                                       style: TextStyle(
                                         color: Color(0xff191919),
                                         fontSize: 16,
@@ -159,7 +162,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Check In Date 14th February,2021',
+                                    'Check In Date ${DateFormat.yMMMMd().format(DateTime.parse(widget.bookDetails.startDate.toDate().toString()))}',
                                     style: TextStyle(
                                       fontSize: 12,
                                     ),
@@ -168,7 +171,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                     height: 10,
                                   ),
                                   Text(
-                                    'Check Out Date 16th February,2021',
+                                    'Check Out Date ${DateFormat.yMMMMd().format(DateTime.parse(widget.bookDetails.endDate.toDate().toString()))}',
                                     style: TextStyle(
                                       fontSize: 12,
                                     ),
@@ -178,214 +181,102 @@ class _CheckInPageState extends State<CheckInPage> {
                             ],
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 30,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'images/one_box.png',
-                                    scale: 12,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Single | Non AC',
-                                    style: TextStyle(fontSize: 12, height: 1),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: 20,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xff6b6b6b),
-                                  ),
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    iconSize: 0,
-                                    hint: Center(
-                                      child: Text(
-                                        "Room No",
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    value: _dropDownValue,
-                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Center(
-                                            child: new Text(
-                                          value,
-                                          style: TextStyle(
-                                            fontSize: 12,
+                          LimitedBox(
+                            // height: 150,
+                            // width: double.maxFinite,
+                            // alignment: Alignment.centerLeft,
+                            maxHeight: 150,
+                            maxWidth: double.maxFinite,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: widget.bookDetails.selectedRooms.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            'images/one_box.png',
+                                            scale: 12,
+                                            fit: BoxFit.fill,
                                           ),
-                                        )),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          _dropDownValue = value;
-                                        },
-                                      );
-                                    },
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            '${widget.bookDetails.selectedRooms[index]}',
+                                            style: TextStyle(fontSize: 12, height: 1),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        height: 20,
+                                        width: 60,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Color(0xff6b6b6b),
+                                          ),
+                                          borderRadius: BorderRadius.circular(4.0),
+                                        ),
+                                        child: DropdownButtonHideUnderline(
+                                          child: DropdownButton<String>(
+                                            iconSize: 0,
+                                            hint: Center(
+                                              child: Text(
+                                                widget.bookDetails.bookedRooms[index],
+                                                style: GoogleFonts.roboto(
+                                                  fontSize: 12,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                            isExpanded: true,
+                                            value: index == 0
+                                                ? roomType1
+                                                : index == 1
+                                                    ? roomType2
+                                                    : roomType3,
+                                            items: widget.bookDetails.bookedRooms.map((value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Center(
+                                                    child: new Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                  ),
+                                                )),
+                                              );
+                                            }).toList(),
+                                            onChanged: (value) {
+                                              setState(
+                                                () {
+                                                  if (index == 0) {
+                                                    roomType1 = value;
+                                                  } else if (index == 1) {
+                                                    roomType2 = value;
+                                                  } else if (index == 2) {
+                                                    roomType3 = value;
+                                                  }
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                ),
-                              )
-                            ],
+                                );
+                              },
+                            ),
                           ),
                           SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'images/one_box.png',
-                                    scale: 12,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Single | Non AC',
-                                    style: TextStyle(fontSize: 12, height: 1),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: 20,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xff6b6b6b),
-                                  ),
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    iconSize: 0,
-                                    hint: Center(
-                                      child: Text(
-                                        "Room No",
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    value: _dropDownValue,
-                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Center(
-                                            child: new Text(
-                                          value,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        )),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          _dropDownValue = value;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'images/one_box.png',
-                                    scale: 12,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Single | Non AC',
-                                    style: TextStyle(fontSize: 12, height: 1),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: 20,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xff6b6b6b),
-                                  ),
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    iconSize: 0,
-                                    hint: Center(
-                                      child: Text(
-                                        "Room No",
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    value: _dropDownValue,
-                                    items: <String>['ST01', 'ST02', 'ST03', 'ST04'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Center(
-                                            child: new Text(
-                                          value,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        )),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          _dropDownValue = value;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 40,
+                            height: 10,
                           ),
                           Container(
                             color: Color(0xffefefef),
@@ -410,7 +301,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                                 ),
                                               ),
                                               Text(
-                                                '৳ 2000',
+                                                '৳ ${widget.bookDetails.totalDiscountedPrice}',
                                                 style: TextStyle(fontSize: 20, height: 1),
                                               ),
                                             ],
@@ -456,7 +347,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                             ),
                                           ),
                                           Text(
-                                            '2300',
+                                            '${widget.bookDetails.totalPrice}',
                                             style: TextStyle(
                                               fontSize: 10,
                                               height: 2,
@@ -477,7 +368,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                             ),
                                           ),
                                           Text(
-                                            '200',
+                                            '${widget.bookDetails.totalDiscountedPrice}',
                                             style: TextStyle(
                                               fontSize: 10,
                                               height: 2,
@@ -498,7 +389,7 @@ class _CheckInPageState extends State<CheckInPage> {
                                             ),
                                           ),
                                           Text(
-                                            '100',
+                                            '${((widget.bookDetails.totalPrice * 0.2) - (widget.bookDetails.totalPrice - widget.bookDetails.totalDiscountedPrice)).toInt()}',
                                             style: TextStyle(
                                               fontSize: 10,
                                               height: 2,
