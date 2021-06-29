@@ -62,7 +62,11 @@ class BookRepository {
 
     print('freerooms $output');
 
-    return output;
+    if (bookedRooms.isEmpty) {
+      return hotelDetailsGlobal.rooms;
+    } else {
+      return output;
+    }
   }
 
   Future<bool> confirmBooking(BookDetails bookDetails) async {

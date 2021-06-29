@@ -33,7 +33,9 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingBlocState> {
     } else if (event is LoadFreeRoomsEvent) {
       yield ProccesingState();
 
-      List freeRooms = await _bookRepository.getFreeRooms(event.bookDetails);
+      List freeRooms = [];
+
+      freeRooms = await _bookRepository.getFreeRooms(event.bookDetails);
 
       print(freeRooms);
 
