@@ -89,11 +89,11 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
             builder: (context, state) {
               return Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: SingleChildScrollView(
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Container(
-                        height: MediaQuery.of(context).size.height,
+                        height: MediaQuery.of(context).size.height - 80,
                         child: Column(
                           children: [
                             //Information part start
@@ -107,7 +107,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Customer:',
+                                      'Order ID: #${widget.bookDetails.bid}',
                                       style: TextStyle(color: Color(0xff191919), fontSize: 20, fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -205,6 +205,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                   maxHeight: 150,
                                   maxWidth: double.maxFinite,
                                   child: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: widget.bookDetails.selectedRooms.length,
                                     itemBuilder: (context, index) {

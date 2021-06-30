@@ -13,8 +13,6 @@ import 'package:stayegy_host/container/bookedTile.dart';
 import 'package:stayegy_host/container/loading_Overlay.dart';
 import 'package:stayegy_host/container/paddingTile.dart';
 
-import 'booking_confirm_page.dart';
-
 class BookingPage extends StatefulWidget {
   @override
   _BookingPageState createState() => _BookingPageState();

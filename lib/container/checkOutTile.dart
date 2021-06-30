@@ -1,16 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stayegy_host/Screen/check_in_page.dart';
+
 import 'package:stayegy_host/Screen/check_out_page.dart';
-import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
+
 import 'package:intl/intl.dart';
+import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 
 class CheckOutTile extends StatelessWidget {
+  final BookDetails bookDetails;
+
+  CheckOutTile({@required this.bookDetails});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => CheckOutPage())),
+      onTap: () => Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (_) => CheckOutPage(
+                    bookDetails: bookDetails,
+                  ))),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -25,23 +35,20 @@ class CheckOutTile extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          // bookDetails.userName != null ? bookDetails.userName : 'Mr xyz',
-                          'Mr xyz',
+                          bookDetails.userName,
                           style: GoogleFonts.roboto(fontSize: 16, height: 2, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           width: 5,
                         ),
                         Text(
-                          // bookDetails.userPhoneNumber != null ? "(${bookDetails.userPhoneNumber})" : '124587569854',
-                          '01754856892',
+                          bookDetails.userPhoneNumber,
                           style: GoogleFonts.roboto(fontSize: 10, height: 2, color: Color(0xff6b6b6b)),
                         ),
                       ],
                     ),
                     Text(
-                      // bookDetails.totalDiscountedPrice != null ? "৳ ${bookDetails.totalDiscountedPrice.toString()}" : '0',
-                      '৳ 1200',
+                      '৳ ${bookDetails.totalDiscountedPrice}',
                       style: GoogleFonts.roboto(fontSize: 16, height: 2, fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -66,10 +73,16 @@ class CheckOutTile extends StatelessWidget {
                             SizedBox(
                               width: 12,
                             ),
-                            Text(
-                              'ST021,STO13',
-                              style: GoogleFonts.roboto(fontSize: 10, height: 1, color: Color(0xff6b6b6b)),
-                            ),
+                            Row(
+                                children: bookDetails.bookedRooms
+                                    .map(
+                                      (item) => Text(
+                                        // 'ST021,STO13',
+                                        bookDetails.bookedRooms[0] == item ? item : ', $item',
+                                        style: GoogleFonts.roboto(fontSize: 10, height: 1, color: Color(0xff6b6b6b)),
+                                      ),
+                                    )
+                                    .toList()),
                           ],
                         ),
                         SizedBox(
@@ -87,9 +100,7 @@ class CheckOutTile extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              // '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.dateRange["endDate"].toDate().toString()))}',
-                              // '${DateTime.parse(bookDetails.dateRange["startDate"].toDate().toString())}',
-                              'June 12 - June 15',
+                              '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.startDate.toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.endDate.toDate().toString()))}',
                               style: GoogleFonts.roboto(fontSize: 8, height: 1.5, color: Color(0xff6b6b6b)),
                             ),
                           ],

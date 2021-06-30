@@ -57,6 +57,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Guests',
                   scale: 8,
                   onTap: () {
+                    BlocProvider.of<LoadingBloc>(context).add(LoadGuestsEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => GuestsPage()));
                   },
                 ),

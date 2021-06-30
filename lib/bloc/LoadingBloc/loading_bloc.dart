@@ -56,6 +56,20 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingBlocState> {
       } else {
         yield BookCancelledFailedState();
       }
+    } else if (event is ConfirmCheckInEvent) {
+      yield ProccesingState();
+
+      if (await _bookRepository.congirmCheckIn(event.bookDetails)) {
+        yield CheckInConfirmedState();
+      } else {
+        yield CheckInFailedState();
+      }
+    } else if (event is LoadGuestsEvent) {
+      yield ProccesingState();
+
+      List guestsList = await _bookRepository.getGuestsList();
+
+      yield GuestsLoadedState(loadedGuests: guestsList);
     }
   }
 

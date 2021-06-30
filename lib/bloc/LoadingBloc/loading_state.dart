@@ -37,3 +37,16 @@ class RoomConfirmedFailedState extends LoadingBlocState {}
 class BookCancelledState extends LoadingBlocState {}
 
 class BookCancelledFailedState extends LoadingBlocState {}
+
+class CheckInConfirmedState extends LoadingBlocState {}
+
+class CheckInFailedState extends LoadingBlocState {}
+
+class GuestsLoadedState extends LoadingBlocState {
+  final List loadedGuests;
+
+  GuestsLoadedState({@required this.loadedGuests});
+
+  @override
+  List<Object> get props => [loadedGuests];
+}

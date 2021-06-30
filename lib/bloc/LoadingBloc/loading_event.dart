@@ -35,3 +35,14 @@ class CancelBookEvent extends LoadingEvent {
   @override
   List<Object> get props => [bookDetails];
 }
+
+class ConfirmCheckInEvent extends LoadingEvent {
+  final BookDetails bookDetails;
+
+  ConfirmCheckInEvent({@required this.bookDetails});
+
+  @override
+  List<Object> get props => [bookDetails];
+}
+
+class LoadGuestsEvent extends LoadingEvent {}

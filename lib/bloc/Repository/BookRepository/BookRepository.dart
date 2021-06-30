@@ -19,7 +19,6 @@ class BookRepository {
     return bookedList;
   }
 
-// .where("isAccepted", isEqualTo: true)
   Future<List> getPendingList() async {
     List<BookDetails> pendingList = [];
 
@@ -31,6 +30,20 @@ class BookRepository {
     }
 
     return pendingList;
+  }
+
+  Future<List> getGuestsList() async {
+    List<BookDetails> guestsList = [];
+
+    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'booked').where('isCheckedIn', isEqualTo: true).get();
+
+    print("guests length ${querySnapshot.docs.length}, hid: ${hotelDetailsGlobal.hid}");
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      guestsList.add(BookDetails.fromMap(querySnapshot.docs[i].data()));
+      print("${querySnapshot.docs.first.toString()} ++++ has been added to booked list!");
+    }
+
+    return guestsList;
   }
 
   Future<List> getFreeRooms(BookDetails bookDetails) async {
@@ -98,6 +111,19 @@ class BookRepository {
     if (documentReference.docs.isNotEmpty) {
       print(documentReference.docs.first.id);
       bookDetails.status = 'cancelled';
+      await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> congirmCheckIn(BookDetails bookDetails) async {
+    final documentReference = await db.collection("bookings").where("bid", isEqualTo: bookDetails.bid).get();
+    print(documentReference.docs.first.id);
+    if (documentReference.docs.isNotEmpty) {
+      print(documentReference.docs.first.id);
+      bookDetails.isCheckedIn = true;
       await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
       return true;
     } else {
