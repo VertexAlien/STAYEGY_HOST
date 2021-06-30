@@ -13,32 +13,8 @@ class CheckInPage extends StatefulWidget {
 }
 
 class _CheckInPageState extends State<CheckInPage> {
-  String _dropDownValue;
-
   String roomType1, roomType2, roomType3;
 
-  final List<String> listItem = <String>[
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-    "ST01",
-  ];
-
-  ///Can be done with stateless , it might help better performance
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,52 +199,16 @@ class _CheckInPageState extends State<CheckInPage> {
                                           ),
                                           borderRadius: BorderRadius.circular(4.0),
                                         ),
-                                        child: DropdownButtonHideUnderline(
-                                          child: DropdownButton<String>(
-                                            iconSize: 0,
-                                            hint: Center(
-                                              child: Text(
-                                                widget.bookDetails.bookedRooms[index],
-                                                style: GoogleFonts.roboto(
-                                                  fontSize: 12,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
+                                        child: Center(
+                                          child: Text(
+                                            widget.bookDetails.bookedRooms[index],
+                                            style: GoogleFonts.roboto(
+                                              fontSize: 12,
+                                              color: Colors.black,
                                             ),
-                                            isExpanded: true,
-                                            value: index == 0
-                                                ? roomType1
-                                                : index == 1
-                                                    ? roomType2
-                                                    : roomType3,
-                                            items: widget.bookDetails.bookedRooms.map((value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Center(
-                                                    child: new Text(
-                                                  value,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                  ),
-                                                )),
-                                              );
-                                            }).toList(),
-                                            onChanged: (value) {
-                                              setState(
-                                                () {
-                                                  if (index == 0) {
-                                                    roomType1 = value;
-                                                  } else if (index == 1) {
-                                                    roomType2 = value;
-                                                  } else if (index == 2) {
-                                                    roomType3 = value;
-                                                  }
-                                                },
-                                              );
-                                            },
                                           ),
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 );

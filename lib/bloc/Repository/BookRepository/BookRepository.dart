@@ -8,7 +8,7 @@ class BookRepository {
   Future<List> getBookedList() async {
     List<BookDetails> bookedList = [];
 
-    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'booked').get();
+    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'booked').where('isCheckedIn', isEqualTo: false).get();
 
     print("booked length ${querySnapshot.docs.length}, hid: ${hotelDetailsGlobal.hid}");
     for (int i = 0; i < querySnapshot.docs.length; i++) {
@@ -45,7 +45,12 @@ class BookRepository {
       print(bookDetails.endDate.toDate());
 
       if (querySnapshot.docs[i].data()['startDate'].toDate().isBefore(bookDetails.endDate.toDate()) || querySnapshot.docs[i].data()['endDate'].toDate() == bookDetails.startDate.toDate()) {
-        bookedRooms.add(querySnapshot.docs[i].data()['bookedRooms']);
+        List tempBooklist = querySnapshot.docs[i].data()['bookedRooms'];
+
+        tempBooklist.forEach((element) {
+          bookedRooms.add(element);
+        });
+
         if (querySnapshot.docs[i].data()['endDate'].toDate() == bookDetails.startDate.toDate()) {
           List templist = querySnapshot.docs[i].data()['bookedRooms'];
           templist.forEach((element) {
@@ -53,13 +58,15 @@ class BookRepository {
           });
           print('freerooms same date $output');
         }
-        print('booked rooms $bookedRooms');
+
         print('executed');
       }
     }
 
+    print('booked rooms $bookedRooms');
+
     hotelDetailsGlobal.rooms.forEach((element) {
-      if (bookedRooms.contains(element)) {
+      if (!bookedRooms.contains(element)) {
         output.add(element);
       }
     });
@@ -78,6 +85,19 @@ class BookRepository {
     print(documentReference.docs.first.id);
     if (documentReference.docs.isNotEmpty) {
       print(documentReference.docs.first.id);
+      await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> cancelBooking(BookDetails bookDetails) async {
+    final documentReference = await db.collection("bookings").where("bid", isEqualTo: bookDetails.bid).get();
+    print(documentReference.docs.first.id);
+    if (documentReference.docs.isNotEmpty) {
+      print(documentReference.docs.first.id);
+      bookDetails.status = 'cancelled';
       await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
       return true;
     } else {

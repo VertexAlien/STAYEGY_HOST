@@ -48,6 +48,14 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingBlocState> {
       } else {
         yield RoomConfirmedFailedState();
       }
+    } else if (event is CancelBookEvent) {
+      yield ProccesingState();
+
+      if (await _bookRepository.cancelBooking(event.bookDetails)) {
+        yield BookCancelledState();
+      } else {
+        yield BookCancelledFailedState();
+      }
     }
   }
 

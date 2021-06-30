@@ -16,6 +16,7 @@ class BookDetails {
   Timestamp endDate;
   String status;
   List bookedRooms;
+  bool isCheckedIn;
 
   Map<String, dynamic> toJason() => {
         'userName': userName,
@@ -33,6 +34,7 @@ class BookDetails {
         'endDate': endDate,
         'status': status,
         'bookedRooms': bookedRooms,
+        'isCheckedIn': isCheckedIn,
       };
 
   BookDetails.fromMap(Map<String, dynamic> bookDetailsMap) {
@@ -51,5 +53,6 @@ class BookDetails {
     endDate = bookDetailsMap["endDate"];
     status = bookDetailsMap["status"];
     bookedRooms = bookDetailsMap["bookedRooms"];
+    isCheckedIn = bookDetailsMap["isCheckedIn"];
   }
 }

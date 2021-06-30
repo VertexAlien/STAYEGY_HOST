@@ -33,3 +33,7 @@ class FreeRoomsLoadedState extends LoadingBlocState {
 class RoomConfirmedState extends LoadingBlocState {}
 
 class RoomConfirmedFailedState extends LoadingBlocState {}
+
+class BookCancelledState extends LoadingBlocState {}
+
+class BookCancelledFailedState extends LoadingBlocState {}

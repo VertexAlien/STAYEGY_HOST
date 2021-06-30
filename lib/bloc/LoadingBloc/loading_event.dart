@@ -26,3 +26,12 @@ class ConfirmBookEvent extends LoadingEvent {
   @override
   List<Object> get props => [bookDetails];
 }
+
+class CancelBookEvent extends LoadingEvent {
+  final BookDetails bookDetails;
+
+  CancelBookEvent({@required this.bookDetails});
+
+  @override
+  List<Object> get props => [bookDetails];
+}

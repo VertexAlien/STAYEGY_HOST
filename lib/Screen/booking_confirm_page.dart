@@ -65,6 +65,16 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                 message: "Room Book Failed!",
                 color: Colors.red,
               );
+            } else if (state is BookCancelledState) {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            } else if (state is BookCancelledFailedState) {
+              Navigator.pop(context);
+
+              SnackBarBuilder().buildSnackBar(
+                context,
+                message: "Book Reject Failed. Try again later.",
+                color: Colors.red,
+              );
             }
           },
           child: BlocBuilder<LoadingBloc, LoadingBlocState>(
@@ -425,7 +435,6 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
-                            onTap: null,
                             child: Container(
                               height: 50,
                               width: 170,
@@ -440,6 +449,9 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                                 ),
                               ),
                             ),
+                            onTap: () {
+                              BlocProvider.of<LoadingBloc>(context).add(CancelBookEvent(bookDetails: widget.bookDetails));
+                            },
                           ),
                           GestureDetector(
                             child: Container(
