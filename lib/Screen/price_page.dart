@@ -56,6 +56,10 @@ class PricePage extends StatelessWidget {
                             height: 1.5,
                             color: Colors.white,
                           )),
+                      Text(
+                        'Stayegy Fee : ${(1200 * 0.2).toInt()}tk',
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
                     ],
                   ),
                 ),
@@ -79,6 +83,10 @@ class PricePage extends StatelessWidget {
                             height: 1.5,
                             color: Colors.white,
                           )),
+                      Text(
+                        'Stayegy Fee : ${(1200 * 0.2).toInt()}tk',
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
                     ],
                   ),
                 ),
@@ -102,6 +110,10 @@ class PricePage extends StatelessWidget {
                             height: 1.5,
                             color: Colors.white,
                           )),
+                      Text(
+                        'Stayegy Fee : ${(800 * 0.2).toInt()}tk',
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
                     ],
                   ),
                 ),
