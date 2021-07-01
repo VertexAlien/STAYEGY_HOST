@@ -153,56 +153,6 @@ class _BookingPageState extends State<BookingPage> {
                             ),
                           ],
                         ),
-
-                  // Container(
-                  //     child: Column(
-                  //       children: [
-                  //         Center(
-                  //           child: Padding(
-                  //             padding: const EdgeInsets.all(16),
-                  //             child: Align(
-                  //               alignment: Alignment.topCenter,
-                  //               child: Container(
-                  //                 decoration: BoxDecoration(
-                  //                   borderRadius: BorderRadius.circular(3),
-                  //                   color: Colors.black,
-                  //                 ),
-                  //                 height: 40,
-                  //                 width: MediaQuery.of(context).size.width,
-                  //                 padding: EdgeInsets.only(left: 15),
-                  //                 alignment: Alignment.centerLeft,
-                  //                 //color: Colors.white,
-                  //                 child: Text(
-                  //                   'Search by mobile number',
-                  //                   style: TextStyle(
-                  //                     color: Colors.white,
-                  //                     fontSize: 14,
-                  //                     fontWeight: FontWeight.w400,
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         // ListView.builder(
-                  //         //     itemCount: 2,
-                  //         //     itemBuilder: (context, index) {
-                  //         //       return BookedTile();
-                  //         //     })
-
-                  //         Expanded(
-                  //           child: ListView.builder(
-                  //             itemCount: bookedList.length,
-                  //             itemBuilder: (context, index) {
-                  //               return BookedTile(
-                  //                 bookDetails: bookedList[index],
-                  //               );
-                  //             },
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
                   state is ProccesingState
                       ? LoadingOverlay().buildWidget(context)
                       : ListView.builder(

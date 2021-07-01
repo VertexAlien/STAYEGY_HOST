@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy_host/constants/constant.dart';
 
 class PricePage extends StatelessWidget {
   const PricePage({Key key}) : super(key: key);
@@ -36,91 +39,47 @@ class PricePage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              children: [
-                Container(
-                  height: 300,
-                  width: double.maxFinite,
-                  color: Colors.green,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: LimitedBox(
+              maxHeight: MediaQuery.of(context).size.height,
+              maxWidth: double.maxFinite,
+              child: ListView.builder(
+                itemCount: hotelDetailsGlobal.roomPrices.length,
+                itemBuilder: (context, index) {
+                  return Column(
                     children: [
-                      Text(
-                        'AC',
-                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      Container(
+                        height: index == hotelDetailsGlobal.roomPrices.length - 1 ? 350 : 300,
+                        width: double.maxFinite,
+                        // color: Colors.green,
+                        color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              hotelDetailsGlobal.roomPrices.keys.elementAt(index),
+                              style: TextStyle(fontSize: 30, color: Colors.white),
+                            ),
+                            Text('${hotelDetailsGlobal.roomPrices.values.elementAt(index)}tk',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 40,
+                                  height: 1.5,
+                                  color: Colors.white,
+                                )),
+                            Text(
+                              'Stayegy Fee : ${(hotelDetailsGlobal.roomPrices.values.elementAt(index) * 0.2).toInt()}tk',
+                              style: TextStyle(fontSize: 15, color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
-                      Text('1200tk',
-                          style: GoogleFonts.roboto(
-                            fontSize: 40,
-                            height: 1.5,
-                            color: Colors.white,
-                          )),
-                      Text(
-                        'Stayegy Fee : ${(1200 * 0.2).toInt()}tk',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
-                      ),
+                      SizedBox(
+                        height: 20,
+                      )
                     ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 300,
-                  width: double.maxFinite,
-                  color: Colors.redAccent,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Single | AC',
-                        style: TextStyle(fontSize: 30, color: Colors.white),
-                      ),
-                      Text('1200tk',
-                          style: GoogleFonts.roboto(
-                            fontSize: 40,
-                            height: 1.5,
-                            color: Colors.white,
-                          )),
-                      Text(
-                        'Stayegy Fee : ${(1200 * 0.2).toInt()}tk',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 300,
-                  width: double.maxFinite,
-                  color: Colors.blueAccent,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Single | Non AC',
-                        style: TextStyle(fontSize: 30, color: Colors.white),
-                      ),
-                      Text('800tk',
-                          style: GoogleFonts.roboto(
-                            fontSize: 40,
-                            height: 1.5,
-                            color: Colors.white,
-                          )),
-                      Text(
-                        'Stayegy Fee : ${(800 * 0.2).toInt()}tk',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
         ),

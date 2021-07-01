@@ -63,7 +63,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 80,
+                    height: MediaQuery.of(context).size.height,
                     child: Column(
                       children: [
                         //Information part start
