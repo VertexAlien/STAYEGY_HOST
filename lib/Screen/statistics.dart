@@ -139,23 +139,19 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 SizedBox(
                   height: 10,
                 ),
-                Container(
-                  color: Colors.amberAccent,
-                  width: double.infinity,
-                  child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Last Due Cleared',
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, height: 0, color: Color(0xff191919)),
-                        ),
-                        Text(
-                          '25/01022',
-                          style: TextStyle(fontSize: 13, height: 1.5, color: Color(0xff5bc48b)),
-                        ),
-                      ],
-                    ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Last Due Cleared',
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, height: 0, color: Color(0xff191919)),
+                      ),
+                      Text(
+                        '25/01022',
+                        style: TextStyle(fontSize: 13, height: 1.5, color: Color(0xff5bc48b)),
+                      ),
+                    ],
                   ),
                 ),
               ],
