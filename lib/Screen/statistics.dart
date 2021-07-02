@@ -36,12 +36,15 @@ class _StatisticsPageState extends State<StatisticsPage> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(left: 10, right: 10),
             child: Column(
               children: [
                 Container(
-                  height: 150,
+                  padding: const EdgeInsets.only(top: 10),
+                  height: 180,
                   width: 500,
                   color: Color(0xfff4f4f4),
                   child: Column(
@@ -62,18 +65,21 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   height: 10,
                 ),
                 Container(
-                  height: 40,
+                  height: 100,
                   width: 500,
                   color: Color(0xfff4f4f4),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Current Week',
-                        style: TextStyle(fontSize: 16, height: 1, color: Color(0xffa2a2a2)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '185',
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, height: 0, color: Color(0xff5bc48b)),
                       ),
-                    ),
+                      Text(
+                        'Total Reaches',
+                        style: TextStyle(fontSize: 12, height: 1.5, color: Color(0xff191919)),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
@@ -82,11 +88,11 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Total Bookings',
+                        'Total Checkins',
                         style: TextStyle(fontSize: 13, color: Color(0xff191919)),
                       ),
                       Text(
-                        '23',
+                        '123',
                         style: TextStyle(fontSize: 13, color: Color(0xff191919)),
                       ),
                     ],
@@ -101,7 +107,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Total Earnings',
+                        'Weekly Earnings',
                         style: TextStyle(fontSize: 13, color: Color(0xff191919)),
                       ),
                       Text(
@@ -120,7 +126,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Total STAYEGY Fee',
+                        'Stayegy Due',
                         style: TextStyle(fontSize: 13, color: Color(0xff191919)),
                       ),
                       Text(
@@ -129,74 +135,27 @@ class _StatisticsPageState extends State<StatisticsPage> {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Container(
-                  height: 40,
-                  width: 500,
-                  color: Color(0xfff4f4f4),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Current Month',
-                        style: TextStyle(fontSize: 16, height: 1, color: Color(0xffa2a2a2)),
-                      ),
+                  color: Colors.amberAccent,
+                  width: double.infinity,
+                  child: Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Last Due Cleared',
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, height: 0, color: Color(0xff191919)),
+                        ),
+                        Text(
+                          '25/01022',
+                          style: TextStyle(fontSize: 13, height: 1.5, color: Color(0xff5bc48b)),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8.0, 15, 8, 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total Bookings',
-                        style: TextStyle(fontSize: 13, color: Color(0xff191919)),
-                      ),
-                      Text(
-                        '23',
-                        style: TextStyle(fontSize: 13, color: Color(0xff191919)),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total Earnings',
-                        style: TextStyle(fontSize: 13, color: Color(0xff191919)),
-                      ),
-                      Text(
-                        '৳ 14520',
-                        style: TextStyle(fontSize: 13, color: Color(0xff191919)),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total STAYEGY Fee',
-                        style: TextStyle(fontSize: 13, color: Color(0xff191919)),
-                      ),
-                      Text(
-                        '৳ 2,904',
-                        style: TextStyle(fontSize: 13, color: Color(0xff191919)),
-                      ),
-                    ],
                   ),
                 ),
               ],
