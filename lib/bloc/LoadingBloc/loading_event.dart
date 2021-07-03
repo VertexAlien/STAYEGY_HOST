@@ -46,3 +46,12 @@ class ConfirmCheckInEvent extends LoadingEvent {
 }
 
 class LoadGuestsEvent extends LoadingEvent {}
+
+class LoadRoomsBookingsEvent extends LoadingEvent {
+  final String roomNo;
+
+  LoadRoomsBookingsEvent({@required this.roomNo});
+
+  @override
+  List<Object> get props => [roomNo];
+}

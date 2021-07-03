@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stayegy_host/Screen/roomstatus.dart';
+import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
 
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
@@ -206,7 +207,10 @@ class _HomePageState extends State<HomePage> {
                                           state.hotel.rooms.length,
                                           (index) {
                                             return GestureDetector(
-                                              onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => RoomStatus())),
+                                              onTap: () {
+                                                BlocProvider.of<LoadingBloc>(context).add(LoadRoomsBookingsEvent(roomNo: state.hotel.rooms[index]));
+                                                Navigator.push(context, CupertinoPageRoute(builder: (_) => RoomStatus(roomNo: state.hotel.rooms[index])));
+                                              },
                                               child: Card(
                                                 margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
                                                 color: Color(0xff5aa469),

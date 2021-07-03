@@ -46,6 +46,22 @@ class BookRepository {
     return guestsList;
   }
 
+  Future<List> getBookingsbyRoomNo(String roomNo) async {
+    List<BookDetails> bookings = [];
+
+    Timestamp currentTime = Timestamp.fromDate(DateTime.now());
+
+    QuerySnapshot querySnapshot = await db.collection("bookings").where('hid', isEqualTo: hotelDetailsGlobal.hid).where('status', isEqualTo: 'booked').where('bookedRooms', arrayContains: roomNo).where('endDate', isGreaterThanOrEqualTo: currentTime).get();
+
+    print("bookings length ${querySnapshot.docs.length}, hid: ${hotelDetailsGlobal.hid}");
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      bookings.add(BookDetails.fromMap(querySnapshot.docs[i].data()));
+      print("${querySnapshot.docs.first.toString()} ++++ has been added to booked list!");
+    }
+
+    return bookings;
+  }
+
   Future<List> getFreeRooms(BookDetails bookDetails) async {
     List bookedRooms = [];
     List output = [];

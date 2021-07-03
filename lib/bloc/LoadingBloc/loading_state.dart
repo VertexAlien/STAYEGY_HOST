@@ -50,3 +50,12 @@ class GuestsLoadedState extends LoadingBlocState {
   @override
   List<Object> get props => [loadedGuests];
 }
+
+class LoadedRoomsBookingsState extends LoadingBlocState {
+  final List bookings;
+
+  LoadedRoomsBookingsState({@required this.bookings});
+
+  @override
+  List<Object> get props => [bookings];
+}

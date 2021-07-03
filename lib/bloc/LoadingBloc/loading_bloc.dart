@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookRepository.dart';
 import 'package:stayegy_host/constants/constant.dart';
@@ -70,6 +71,12 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingBlocState> {
       List guestsList = await _bookRepository.getGuestsList();
 
       yield GuestsLoadedState(loadedGuests: guestsList);
+    } else if (event is LoadRoomsBookingsEvent) {
+      yield ProccesingState();
+
+      List bookings = await _bookRepository.getBookingsbyRoomNo(event.roomNo);
+
+      yield LoadedRoomsBookingsState(bookings: bookings);
     }
   }
 
