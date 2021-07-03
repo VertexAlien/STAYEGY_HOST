@@ -209,8 +209,8 @@ class _HomePageState extends State<HomePage> {
                                               onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => RoomStatus())),
                                               child: Card(
                                                 margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
-                                                // color: Color(0xff5aa469),
-                                                color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                                                color: Color(0xff5aa469),
+                                                // color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
                                                 child: Center(
                                                   child: Text(
                                                     'Room ${state.hotel.rooms[index]}',

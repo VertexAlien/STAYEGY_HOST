@@ -93,7 +93,7 @@ class _BookingConfirmPageState extends State<BookingConfirmPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Container(
-                        height: MediaQuery.of(context).size.height,
+                        height: MediaQuery.of(context).size.height - AppBar().preferredSize.height,
                         child: Column(
                           children: [
                             //Information part start
