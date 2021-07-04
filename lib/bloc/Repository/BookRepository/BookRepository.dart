@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 import 'package:stayegy_host/constants/constant.dart';
 
@@ -141,6 +143,12 @@ class BookRepository {
       print(documentReference.docs.first.id);
       bookDetails.isCheckedIn = true;
       await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
+      await db.collection("hotels").doc(hotelDetailsGlobal.id).update({
+        'stayegyDue': FieldValue.increment((bookDetails.totalPrice * 0.2).toInt() - (bookDetails.totalPrice - bookDetails.totalDiscountedPrice)),
+        'currentEarnings': FieldValue.increment(bookDetails.totalPrice - (bookDetails.totalPrice * 0.2).toInt()),
+        'totalEarnings': FieldValue.increment(bookDetails.totalPrice - (bookDetails.totalPrice * 0.2).toInt()),
+        'totalCheckIns': FieldValue.increment(1),
+      });
       return true;
     } else {
       return false;

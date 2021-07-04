@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
 import 'package:stayegy_host/bloc/Repository/HotelRepository/hotel.dart';
+import 'package:stayegy_host/constants/constant.dart';
 
 import 'User_Details.dart';
 

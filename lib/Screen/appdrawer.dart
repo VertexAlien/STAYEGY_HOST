@@ -9,6 +9,8 @@ import 'package:stayegy_host/Screen/statistics.dart';
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Bloc.dart';
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Events.dart';
 import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
+import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Bloc.dart';
+import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy_host/constants/constant.dart';
 import 'package:stayegy_host/container/drawer_Data.dart';
 
@@ -82,6 +84,7 @@ class appdrawer extends StatelessWidget {
                   textData: 'Statistics',
                   scale: 10,
                   onTap: () {
+                    BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => StatisticsPage()));
                   },
                 ),

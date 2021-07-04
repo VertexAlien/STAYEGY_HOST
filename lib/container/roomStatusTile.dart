@@ -41,7 +41,7 @@ class RoomStatusTile extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            '${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.startDate.toDate().toString()))}  -  ${DateFormat('dd-MM-yy').format(DateTime.parse(bookDetails.endDate.toDate().toString()))}',
+                            '${DateFormat.yMMMMd().format(DateTime.parse(bookDetails.startDate.toDate().toString()))}  -  ${DateFormat.yMMMMd().format(DateTime.parse(bookDetails.endDate.toDate().toString()))}',
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, height: 1, color: Color(0xff191919)),
                           ),
                         ],
