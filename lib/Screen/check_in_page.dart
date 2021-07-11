@@ -57,6 +57,22 @@ class _CheckInPageState extends State<CheckInPage> {
                 message: "Check In Failed. Try Again later...",
                 color: Colors.red,
               );
+            } else if (state is BookCancelledState) {
+              Navigator.popUntil(context, (route) => route.isFirst);
+
+              SnackBarBuilder().buildSnackBar(
+                context,
+                message: "Check In Rejected!",
+                color: Colors.green,
+              );
+            } else if (state is BookCancelledFailedState) {
+              Navigator.pop(context);
+
+              SnackBarBuilder().buildSnackBar(
+                context,
+                message: "Check In Reject Failed. Try Again later...",
+                color: Colors.red,
+              );
             }
           },
           child: Stack(
@@ -366,14 +382,23 @@ class _CheckInPageState extends State<CheckInPage> {
                 left: 20,
                 child: Container(
                   child: GestureDetector(
-                    onTap: () => BlocProvider.of<LoadingBloc>(context).add(ConfirmCheckInEvent(bookDetails: widget.bookDetails)),
+                    onTap: () => {
+                      if (widget.bookDetails.endDate.toDate().isBefore(DateTime.now()))
+                        {
+                          BlocProvider.of<LoadingBloc>(context).add(CancelBookEvent(bookDetails: widget.bookDetails)),
+                        }
+                      else
+                        {
+                          BlocProvider.of<LoadingBloc>(context).add(ConfirmCheckInEvent(bookDetails: widget.bookDetails)),
+                        }
+                    },
                     child: Container(
                       height: 50,
                       width: 190,
                       alignment: Alignment.center,
                       color: Colors.black,
                       child: Text(
-                        'CONFIRM',
+                        widget.bookDetails.endDate.toDate().isBefore(DateTime.now()) ? 'REJECT' : 'CONFIRM',
                         style: GoogleFonts.roboto(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,

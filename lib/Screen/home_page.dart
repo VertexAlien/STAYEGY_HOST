@@ -22,12 +22,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String valueChoose;
-  List listItem = [
-    "Today",
-    "Tomorrow",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                             hasScrollBody: true,
                             child: Container(
                               height: MediaQuery.of(context).size.height - AppBar().preferredSize.height,
-                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
                               child: Column(
                                 children: [
                                   Center(
@@ -98,97 +92,29 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 150,
-                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
-                                      Text('Date'),
-                                      Container(
-                                        padding: EdgeInsets.only(left: 16, right: 24),
-                                        decoration: BoxDecoration(color: Color(0xffefefef)),
-                                        child: DropdownButtonHideUnderline(
-                                          child: DropdownButton(
-                                            dropdownColor: Colors.grey,
-                                            icon: Icon(Icons.arrow_right),
-                                            iconSize: 35,
-                                            isExpanded: true,
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                            ),
-                                            value: valueChoose,
-                                            onChanged: (newValue) {
-                                              setState(() {
-                                                valueChoose = newValue;
-                                              });
-                                            },
-                                            items: listItem.map((valueItem) {
-                                              return DropdownMenuItem(
-                                                value: valueItem,
-                                                child: Center(
-                                                  child: Text(
-                                                    valueItem,
-                                                    style: GoogleFonts.roboto(
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.normal,
-                                                      color: Color(0xFF110B0B),
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
+                                    height: 60,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
-                                          SizedBox(
-                                            width: 15.00,
-                                            height: 15.00,
-                                            child: const DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                color: Color(0xff5aa469),
-                                              ),
+                                          // SizedBox(
+                                          //   width: 20.00,
+                                          //   height: 20.00,
+                                          //   child: const DecoratedBox(
+                                          //     decoration: const BoxDecoration(
+                                          //       color: Color(0xff5aa469),
+                                          //     ),
+                                          //   ),
+                                          // ),
+                                          Text(
+                                            '  All Rooms ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 23,
                                             ),
                                           ),
-                                          Text('  Open'),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 15.00,
-                                            height: 15.00,
-                                            child: const DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                color: Color(0xffec524b),
-                                              ),
-                                            ),
-                                          ),
-                                          Text('  Close'),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 15.00,
-                                            height: 15.00,
-                                            child: const DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                color: Color(0xfffff3b2),
-                                              ),
-                                            ),
-                                          ),
-                                          Text('  Booked'),
                                         ],
                                       ),
                                     ],
@@ -213,11 +139,12 @@ class _HomePageState extends State<HomePage> {
                                               },
                                               child: Card(
                                                 margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
-                                                color: Color(0xff5aa469),
+                                                // color: Color(0xff5aa469),
                                                 // color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                                                color: Colors.amber,
                                                 child: Center(
                                                   child: Text(
-                                                    'Room ${state.hotel.rooms[index]}',
+                                                    '${state.hotel.rooms[index]}',
                                                     style: TextStyle(fontWeight: FontWeight.bold),
                                                   ),
                                                 ),

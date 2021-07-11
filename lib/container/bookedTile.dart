@@ -103,7 +103,7 @@ class BookedTile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                       child: Container(
-                        color: Colors.black,
+                        color: bookDetails.endDate.toDate().isBefore(DateTime.now()) ? Colors.red : Colors.black,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(15, 4, 15, 4),
                           child: Text(
