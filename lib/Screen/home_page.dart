@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawerEdgeDragWidth: 0,
-      drawer: appdrawer(),
+      drawer: AppDrawer(),
       body: BlocListener<LogInBloc, LogInState>(
         listener: (context, state) {
           if (state is LoadingState) {

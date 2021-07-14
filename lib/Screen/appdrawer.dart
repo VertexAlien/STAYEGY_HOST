@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy_host/Screen/contact_page.dart';
 import 'package:stayegy_host/Screen/price_page.dart';
 import 'package:stayegy_host/Screen/room_settings_page.dart';
-import 'package:stayegy_host/Screen/roomstatus.dart';
+
 import 'package:stayegy_host/Screen/statistics.dart';
 
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Bloc.dart';
@@ -17,12 +18,12 @@ import 'package:stayegy_host/container/drawer_Data.dart';
 import 'booking_page.dart';
 import 'guests_page.dart';
 
-class appdrawer extends StatelessWidget {
+class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        padding: EdgeInsets.fromLTRB(20, 110, 20, 0),
+        padding: EdgeInsets.fromLTRB(20, 80, 20, 0),
         color: Colors.black,
         child: Stack(
           children: <Widget>[
@@ -86,6 +87,15 @@ class appdrawer extends StatelessWidget {
                   onTap: () {
                     BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => StatisticsPage()));
+                  },
+                ),
+                drawer_data(
+                  imagePath: 'images/contact host.png',
+                  textData: 'Contact',
+                  scale: 2,
+                  onTap: () {
+                    BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => ContactPage()));
                   },
                 ),
               ],

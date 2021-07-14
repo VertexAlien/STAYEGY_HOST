@@ -9,8 +9,6 @@ import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 import 'package:stayegy_host/container/checkOutTile.dart';
 import 'package:stayegy_host/container/loading_Overlay.dart';
 
-import 'check_out_page.dart';
-
 class GuestsPage extends StatefulWidget {
   @override
   _GuestsPageState createState() => _GuestsPageState();
