@@ -16,7 +16,7 @@ class drawer_data extends StatelessWidget {
       onTap: onTap,
       child: Container(
         color: Colors.transparent,
-        height: 40,
+        height: 30,
         margin: EdgeInsets.only(top: 30),
         child: Row(
           children: <Widget>[
