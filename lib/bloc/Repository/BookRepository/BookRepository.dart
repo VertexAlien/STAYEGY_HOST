@@ -1,11 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:stayegy_host/bloc/Notificaions/Notification.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookDetails.dart';
 import 'package:stayegy_host/constants/constant.dart';
 
 class BookRepository {
   FirebaseFirestore db = FirebaseFirestore.instance;
+
+  NotificationDetails confirmNotification = NotificationDetails(
+    hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
+    notificationType: "bookingAccepted",
+    senderId: hotelDetailsGlobal.id,
+    seen: false,
+    time: Timestamp.fromDate(DateTime.now()),
+  );
+  NotificationDetails cancelNotification = NotificationDetails(
+    hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
+    notificationType: "bookingCancelled",
+    senderId: hotelDetailsGlobal.id,
+    seen: false,
+    time: Timestamp.fromDate(DateTime.now()),
+  );
+  NotificationDetails checkedInNotification = NotificationDetails(
+    hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
+    notificationType: "checkedIn",
+    senderId: hotelDetailsGlobal.id,
+    seen: false,
+    time: Timestamp.fromDate(DateTime.now()),
+  );
 
   Future<List> getBookedList() async {
     List<BookDetails> bookedList = [];
@@ -116,7 +139,9 @@ class BookRepository {
     print(documentReference.docs.first.id);
     if (documentReference.docs.isNotEmpty) {
       print(documentReference.docs.first.id);
+      confirmNotification.receiverId = bookDetails.uid;
       await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
+      await db.collection("notifications").doc().set(confirmNotification.toJason());
       return true;
     } else {
       return false;
@@ -142,6 +167,7 @@ class BookRepository {
     if (documentReference.docs.isNotEmpty) {
       print(documentReference.docs.first.id);
       bookDetails.isCheckedIn = true;
+      checkedInNotification.receiverId = bookDetails.uid;
       await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
       await db.collection("hotels").doc(hotelDetailsGlobal.id).update({
         'stayegyDue': FieldValue.increment((bookDetails.totalPrice * 0.2).toInt() - (bookDetails.totalPrice - bookDetails.totalDiscountedPrice)),
@@ -149,6 +175,7 @@ class BookRepository {
         'totalEarnings': FieldValue.increment(bookDetails.totalPrice - (bookDetails.totalPrice * 0.2).toInt()),
         'totalCheckIns': FieldValue.increment(1),
       });
+      await db.collection("notifications").doc().set(checkedInNotification.toJason());
       return true;
     } else {
       return false;
