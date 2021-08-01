@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy_host/Screen/contact_page.dart';
 import 'package:stayegy_host/Screen/price_page.dart';
+import 'package:stayegy_host/Screen/privacy_policy.dart';
+
 import 'package:stayegy_host/Screen/room_settings_page.dart';
 
 import 'package:stayegy_host/Screen/statistics.dart';
@@ -98,10 +100,19 @@ class AppDrawer extends StatelessWidget {
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => ContactPage()));
                   },
                 ),
+                drawer_data(
+                  imagePath: 'images/contact host.png',
+                  textData: 'Privacy & Policy',
+                  scale: 2,
+                  onTap: () {
+                    BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
+                    Navigator.push(context, CupertinoPageRoute(builder: (_) => PrivacyAndPolicy()));
+                  },
+                ),
               ],
             ),
             Positioned(
-              bottom: 60.0,
+              bottom: 40.0,
               child: drawer_data(
                 imagePath: 'images/logout_icon.png',
                 textData: 'LOG OUT',
