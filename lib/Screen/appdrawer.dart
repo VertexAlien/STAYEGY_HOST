@@ -51,7 +51,7 @@ class AppDrawer extends StatelessWidget {
                 drawer_data(
                   imagePath: 'images/booking_icon.png',
                   textData: 'Bookings',
-                  scale: 8,
+                  scale: 10,
                   onTap: () {
                     BlocProvider.of<LoadingBloc>(context).add(LoadBookings());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => BookingPage()));
@@ -60,7 +60,7 @@ class AppDrawer extends StatelessWidget {
                 drawer_data(
                   imagePath: 'images/guest_icon.png',
                   textData: 'Guests',
-                  scale: 8,
+                  scale: 10,
                   onTap: () {
                     BlocProvider.of<LoadingBloc>(context).add(LoadGuestsEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => GuestsPage()));
@@ -69,7 +69,7 @@ class AppDrawer extends StatelessWidget {
                 drawer_data(
                   imagePath: 'images/prising.png',
                   textData: 'Price',
-                  scale: 8,
+                  width: 20,
                   onTap: () {
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => PricePage()));
                   },
@@ -85,7 +85,7 @@ class AppDrawer extends StatelessWidget {
                 drawer_data(
                   imagePath: 'images/statistics.png',
                   textData: 'Statistics',
-                  scale: 10,
+                  scale: 2.5,
                   onTap: () {
                     BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => StatisticsPage()));
@@ -94,16 +94,16 @@ class AppDrawer extends StatelessWidget {
                 drawer_data(
                   imagePath: 'images/contact host.png',
                   textData: 'Contact',
-                  scale: 2,
+                  scale: 2.7,
                   onTap: () {
                     BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => ContactPage()));
                   },
                 ),
                 drawer_data(
-                  imagePath: 'images/contact host.png',
+                  imagePath: 'images/privacy policy.png',
                   textData: 'Privacy & Policy',
-                  scale: 2,
+                  scale: 2.5,
                   onTap: () {
                     BlocProvider.of<LogInBloc>(context).add(HomePageReloadEvent());
                     Navigator.push(context, CupertinoPageRoute(builder: (_) => PrivacyAndPolicy()));
@@ -117,7 +117,6 @@ class AppDrawer extends StatelessWidget {
                 imagePath: 'images/logout_icon.png',
                 textData: 'LOG OUT',
                 scale: 10,
-                width: 10,
                 onTap: () {
                   BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
                   print("Pressed! Logout!");

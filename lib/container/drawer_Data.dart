@@ -8,7 +8,7 @@ class drawer_data extends StatelessWidget {
   final String textData;
   final GestureTapCallback onTap;
   double width;
-  double scale = 2.3;
+  double scale;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,7 @@ class drawer_data extends StatelessWidget {
             Image.asset(
               imagePath,
               scale: scale,
+              width: width,
             ),
             SizedBox(
               width: width == null ? width = 20 : width,
