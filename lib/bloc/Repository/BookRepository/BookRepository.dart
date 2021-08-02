@@ -8,28 +8,6 @@ import 'package:stayegy_host/constants/constant.dart';
 class BookRepository {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  NotificationDetails confirmNotification = NotificationDetails(
-    hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
-    notificationType: "bookingAccepted",
-    senderId: hotelDetailsGlobal.id,
-    seen: false,
-    time: Timestamp.fromDate(DateTime.now()),
-  );
-  NotificationDetails cancelNotification = NotificationDetails(
-    hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
-    notificationType: "bookingCancelled",
-    senderId: hotelDetailsGlobal.id,
-    seen: false,
-    time: Timestamp.fromDate(DateTime.now()),
-  );
-  NotificationDetails checkedInNotification = NotificationDetails(
-    hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
-    notificationType: "checkedIn",
-    senderId: hotelDetailsGlobal.id,
-    seen: false,
-    time: Timestamp.fromDate(DateTime.now()),
-  );
-
   Future<List> getBookedList() async {
     List<BookDetails> bookedList = [];
 
@@ -135,6 +113,14 @@ class BookRepository {
   }
 
   Future<bool> confirmBooking(BookDetails bookDetails) async {
+    NotificationDetails confirmNotification = NotificationDetails(
+      hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
+      notificationType: "bookingAccepted",
+      senderId: hotelDetailsGlobal.id,
+      seen: false,
+      time: Timestamp.fromDate(DateTime.now()),
+    );
+
     final documentReference = await db.collection("bookings").where("bid", isEqualTo: bookDetails.bid).get();
     print(documentReference.docs.first.id);
     if (documentReference.docs.isNotEmpty) {
@@ -149,6 +135,14 @@ class BookRepository {
   }
 
   Future<bool> cancelBooking(BookDetails bookDetails) async {
+    NotificationDetails cancelNotification = NotificationDetails(
+      hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
+      notificationType: "bookingCancelled",
+      senderId: hotelDetailsGlobal.id,
+      seen: false,
+      time: Timestamp.fromDate(DateTime.now()),
+    );
+
     final documentReference = await db.collection("bookings").where("bid", isEqualTo: bookDetails.bid).get();
     print(documentReference.docs.first.id);
     if (documentReference.docs.isNotEmpty) {
@@ -162,6 +156,14 @@ class BookRepository {
   }
 
   Future<bool> congirmCheckIn(BookDetails bookDetails) async {
+    NotificationDetails checkedInNotification = NotificationDetails(
+      hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
+      notificationType: "checkedIn",
+      senderId: hotelDetailsGlobal.id,
+      seen: false,
+      time: Timestamp.fromDate(DateTime.now()),
+    );
+
     final documentReference = await db.collection("bookings").where("bid", isEqualTo: bookDetails.bid).get();
     print(documentReference.docs.first.id);
     if (documentReference.docs.isNotEmpty) {
