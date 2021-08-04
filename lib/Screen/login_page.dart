@@ -9,6 +9,8 @@ import 'package:stayegy_host/bloc/FormBloc/Form_States.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_State.dart';
+import 'package:stayegy_host/container/SnackBar.dart';
+import 'package:stayegy_host/container/loading_Overlay.dart';
 
 import 'login_otp.dart';
 
@@ -32,7 +34,19 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: BlocListener<LogInBloc, LogInState>(
           listener: (context, state) {
-            // TODO: implement listener
+            if (state is LoadingState) {
+              LoadingOverlay().build(context);
+            } else if (state is OtpSentState) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => login_otp()));
+            } else if (state is ExceptionState) {
+              Navigator.pop(context);
+
+              SnackBarBuilder().buildSnackBar(
+                context,
+                message: "Error.. Confirm reCaptcha",
+                color: Colors.red,
+              );
+            }
           },
           child: Stack(
             children: <Widget>[
@@ -116,7 +130,6 @@ class _LoginPageState extends State<LoginPage> {
                                       logInBloc.add(
                                         SendOtpEvent(phoNo: '+880' + _phoneNumber),
                                       );
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => login_otp()));
                                     }
                                   },
                                   child: Image(
