@@ -134,6 +134,29 @@ class BookRepository {
     }
   }
 
+  Future<bool> confirmCheckOut(BookDetails bookDetails) async {
+    NotificationDetails checkOutNotification = NotificationDetails(
+      hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,
+      notificationType: "checkedOut",
+      senderId: hotelDetailsGlobal.id,
+      seen: false,
+      time: Timestamp.fromDate(DateTime.now()),
+    );
+
+    final documentReference = await db.collection("bookings").where("bid", isEqualTo: bookDetails.bid).get();
+    print(documentReference.docs.first.id);
+    if (documentReference.docs.isNotEmpty) {
+      print(documentReference.docs.first.id);
+      bookDetails.status = 'checkedOut';
+      checkOutNotification.receiverId = bookDetails.uid;
+      await db.collection("bookings").doc(documentReference.docs.first.id).update(bookDetails.toJason());
+      await db.collection("notifications").doc().set(checkOutNotification.toJason());
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<bool> cancelBooking(BookDetails bookDetails) async {
     NotificationDetails cancelNotification = NotificationDetails(
       hotel: hotelDetailsGlobal.hid + " " + hotelDetailsGlobal.name,

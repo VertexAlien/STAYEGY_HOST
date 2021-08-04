@@ -78,6 +78,14 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingBlocState> {
       List bookings = await _bookRepository.getBookingsbyRoomNo(event.roomNo);
 
       yield LoadedRoomsBookingsState(bookings: bookings);
+    } else if (event is ConfirmCheckOutEvent) {
+      yield ProccesingState();
+
+      if (await _bookRepository.confirmCheckOut(event.bookDetails)) {
+        yield CheckOutConfirmedState();
+      } else {
+        yield CheckOutFailedState();
+      }
     }
   }
 
