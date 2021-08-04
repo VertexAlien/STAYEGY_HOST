@@ -50,7 +50,7 @@ class _LoginOtpState extends State<LoginOtp> {
             Navigator.pop(context);
             SnackBarBuilder().buildSnackBar(context, message: _message, color: Colors.red);
           } else if (state is LogInCompleteState) {
-            _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
+            _authenticationBloc.add(LoggedIn(token: state.getUser().uid, uid: state.getUser().uid));
             // _loginBloc.add(LoadHotelDetailsEvent());
             Navigator.popUntil(context, (route) => route.isFirst);
           } else if (state is LoadingState) {
@@ -118,10 +118,6 @@ class _LoginOtpState extends State<LoginOtp> {
                   seconds: 59,
                   controller: _controller,
                   build: (_, double time) => !_controller.isCompleted
-                      // ? Text(
-                      //     " Wait 00:" + time.toInt().toString() + "s",
-                      //     style: TextStyle(fontSize: 12),
-                      //   )
                       ? RichText(
                           text: TextSpan(children: [
                           TextSpan(

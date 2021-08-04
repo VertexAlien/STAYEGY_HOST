@@ -58,6 +58,17 @@ class UserRepository {
     ]);
   }
 
+  Future<bool> checkForRegistration(String userId) async {
+    final documentReference = await db.collection("hotelOwner").doc(userId).get();
+
+    if (documentReference.exists) {
+      print("Owner Found!");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<Hotel> getHotelDetails() async {
     final documentReference = await db.collection("hotelOwner").doc("${_firebaseAuth.currentUser.uid}").get();
     String hotelID = documentReference.get("hid").toString();

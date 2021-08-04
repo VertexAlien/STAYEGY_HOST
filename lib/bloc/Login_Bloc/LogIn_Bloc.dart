@@ -49,10 +49,6 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         yield OtpExceptionState(message: 'Invalid otp!');
         print(e);
       }
-    } else if (event is UploadDetailsEvent) {
-      yield LoadingState();
-      await _userRepository.uploadUserDetails(user: _userDetails, name: event.name, email: event.email, phoneNumber: _userCredential.user.phoneNumber, gender: event.gender, image: event.image);
-      yield RegistrationCompleteState(_userCredential.user);
     } else if (event is LoadHotelDetailsEvent) {
       yield* _mapLoadHomePageEventToState(event);
     } else if (event is HomePageReloadEvent) {

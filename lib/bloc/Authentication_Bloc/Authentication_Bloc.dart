@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stayegy_host/bloc/Repository/UserRepository/UserRepository.dart';
 import 'package:stayegy_host/bloc/Repository/UserRepository/User_Details.dart';
 
@@ -16,15 +17,27 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> mapEventToState(AuthenticationEvent event) async* {
     if (event is AppStarted) {
       final bool hasToken = await _userRepository.getUser() != null;
+      final user = await _userRepository.getUser();
       if (hasToken) {
-        yield Authenticated();
+        final bool isRegistered = await _userRepository.checkForRegistration(user.uid);
+        if (isRegistered) {
+          yield Authenticated();
+        } else {
+          yield NotRegistered();
+        }
       } else {
         yield Unauthenticated();
       }
     }
     if (event is LoggedIn) {
       yield Loading();
-      yield Authenticated();
+      final bool isRegistered = await _userRepository.checkForRegistration(event.uid);
+
+      if (isRegistered) {
+        yield Authenticated();
+      } else {
+        yield NotRegistered();
+      }
     }
     if (event is LoggedOut) {
       yield Loading();

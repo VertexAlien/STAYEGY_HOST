@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stayegy_host/Screen/not_registered.dart';
 
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
           } else if (state is Authenticated) {
             BlocProvider.of<LogInBloc>(context).add(LoadHotelDetailsEvent());
             return HomePage();
+          } else if (state is NotRegistered) {
+            return NotRegisteredPage();
           } else {
             return SplashPage();
           }

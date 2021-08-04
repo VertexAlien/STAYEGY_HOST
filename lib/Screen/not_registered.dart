@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Bloc.dart';
+import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_Events.dart';
 
-class NotRegistered extends StatefulWidget {
+class NotRegisteredPage extends StatefulWidget {
   @override
-  _NotRegisteredState createState() => _NotRegisteredState();
+  _NotRegisteredPageState createState() => _NotRegisteredPageState();
 }
 
-class _NotRegisteredState extends State<NotRegistered> {
+class _NotRegisteredPageState extends State<NotRegisteredPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +19,9 @@ class _NotRegisteredState extends State<NotRegistered> {
         actions: <Widget>[
           FlatButton(
             padding: EdgeInsets.only(left: 30),
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            },
             child: Image.asset(
               'images/log out (host).png',
               color: Colors.black,

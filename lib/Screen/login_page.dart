@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                   image: AssetImage(state is PhoneNumberNotCheckedState
                                       ? 'images/arrow button default.png'
                                       : state is PhoneNumberCheckedState
-                                          ? 'images/arrow button submit.png'
+                                          ? 'images/arrow button default.png'
                                           : 'images/arrow button default.png'),
                                 ),
                               ),

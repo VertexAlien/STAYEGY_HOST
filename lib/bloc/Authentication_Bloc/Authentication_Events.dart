@@ -17,14 +17,15 @@ class AppStarted extends AuthenticationEvent {
 
 class LoggedIn extends AuthenticationEvent {
   final String token;
+  final String uid;
 
-  LoggedIn({@required this.token});
+  LoggedIn({@required this.token, @required this.uid});
 
   @override
   String toString() => 'LoggedIn {token : $token}';
 
   @override
-  List<Object> get props => [token];
+  List<Object> get props => [token, uid];
 }
 
 class LoggedOut extends AuthenticationEvent {
