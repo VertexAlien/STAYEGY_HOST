@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy_host/Screen/contact_page.dart';
+import 'package:stayegy_host/Screen/not_registered.dart';
 import 'package:stayegy_host/Screen/price_page.dart';
 import 'package:stayegy_host/Screen/privacy_policy.dart';
 
