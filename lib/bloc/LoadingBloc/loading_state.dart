@@ -42,6 +42,10 @@ class CheckInConfirmedState extends LoadingBlocState {}
 
 class CheckInFailedState extends LoadingBlocState {}
 
+class CheckOutConfirmedState extends LoadingBlocState {}
+
+class CheckOutFailedState extends LoadingBlocState {}
+
 class GuestsLoadedState extends LoadingBlocState {
   final List loadedGuests;
 

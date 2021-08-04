@@ -45,6 +45,15 @@ class ConfirmCheckInEvent extends LoadingEvent {
   List<Object> get props => [bookDetails];
 }
 
+class ConfirmCheckOutEvent extends LoadingEvent {
+  final BookDetails bookDetails;
+
+  ConfirmCheckOutEvent({@required this.bookDetails});
+
+  @override
+  List<Object> get props => [bookDetails];
+}
+
 class LoadGuestsEvent extends LoadingEvent {}
 
 class LoadRoomsBookingsEvent extends LoadingEvent {

@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           if (state is Uninitialized) {
             return SplashPage();
           } else if (state is Unauthenticated) {
-            return login_page();
+            return LoginPage();
           } else if (state is Authenticated) {
             BlocProvider.of<LogInBloc>(context).add(LoadHotelDetailsEvent());
             return HomePage();

@@ -45,9 +45,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
           listener: (context, state) {
             if (state is ProccesingState) {
               LoadingOverlay().build(context);
-            } else if (state is CheckInConfirmedState) {
+            } else if (state is CheckOutConfirmedState) {
               Navigator.popUntil(context, (route) => route.isFirst);
-            } else if (state is CheckInFailedState) {
+            } else if (state is CheckOutFailedState) {
               Navigator.pop(context);
 
               SnackBarBuilder().buildSnackBar(
@@ -364,7 +364,25 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 left: 20,
                 child: Container(
                   child: GestureDetector(
-                    onTap: () => null,
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirm Check Out?"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  BlocProvider.of<LoadingBloc>(context).add(ConfirmCheckOutEvent(bookDetails: widget.bookDetails));
+                                },
+                                child: Text("Yes"),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text("No"),
+                              ),
+                            ],
+                          );
+                        }),
                     child: Container(
                       height: 50,
                       width: 190,

@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.black,
         leading: Builder(
           builder: (context) => FlatButton(
@@ -46,11 +47,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: Icon(
-              Icons.notifications,
-            ),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 15.0),
+          //   child: Icon(
+          //     Icons.notifications,
+          //   ),
+          // ),
+          Container(
+            padding: EdgeInsets.only(right: 35),
           ),
         ],
       ),

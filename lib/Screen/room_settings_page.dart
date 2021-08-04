@@ -33,7 +33,8 @@ class _RoomSettingPageState extends State<RoomSettingPage> {
         ),
         centerTitle: true,
         title: Text(
-          'Rooms Settings',
+          // 'Rooms Settings ',
+          '{Not complete}',
           style: GoogleFonts.staatliches(
             fontSize: 26,
           ),
