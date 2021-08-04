@@ -12,21 +12,28 @@ import 'package:stayegy_host/bloc/Login_Bloc/LogIn_State.dart';
 import 'package:stayegy_host/container/SnackBar.dart';
 import 'package:stayegy_host/container/bottom_button.dart';
 import 'package:stayegy_host/container/loading_Overlay.dart';
+import 'package:timer_count_down/timer_controller.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
-class login_otp extends StatefulWidget {
+class LoginOtp extends StatefulWidget {
+  final String phoneNumber;
+
+  LoginOtp({@required this.phoneNumber});
+
   @override
-  _login_otpState createState() => _login_otpState();
+  _LoginOtpState createState() => _LoginOtpState();
 }
 
 // ignore: camel_case_types
-class _login_otpState extends State<login_otp> {
+class _LoginOtpState extends State<LoginOtp> {
   String _otpCode;
+
+  final CountdownController _controller = new CountdownController(autoStart: true);
 
   @override
   Widget build(BuildContext context) {
     final LogInBloc _loginBloc = BlocProvider.of<LogInBloc>(context);
-    final AuthenticationBloc _authenticationBloc =
-        BlocProvider.of<AuthenticationBloc>(context);
+    final AuthenticationBloc _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
 
     TextEditingController otp_getter = new TextEditingController();
     return Scaffold(
@@ -41,8 +48,7 @@ class _login_otpState extends State<login_otp> {
               _message = state.message;
             }
             Navigator.pop(context);
-            SnackBarBuilder()
-                .buildSnackBar(context, message: _message, color: Colors.red);
+            SnackBarBuilder().buildSnackBar(context, message: _message, color: Colors.red);
           } else if (state is LogInCompleteState) {
             _authenticationBloc.add(LoggedIn(token: state.getUser().uid));
             // _loginBloc.add(LoadHotelDetailsEvent());
@@ -65,9 +71,7 @@ class _login_otpState extends State<login_otp> {
               padding: const EdgeInsets.all(15.0),
               child: TextField(
                 keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
+                inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                 onChanged: (value) => _otpCode = value,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -101,11 +105,55 @@ class _login_otpState extends State<login_otp> {
                 },
               ),
             ),
-            Text(
-              "Didn't receive the code? Resend the code in 00:59",
-              style: TextStyle(
-                fontSize: 12,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Didn't receive the code?",
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                Countdown(
+                  seconds: 59,
+                  controller: _controller,
+                  build: (_, double time) => !_controller.isCompleted
+                      // ? Text(
+                      //     " Wait 00:" + time.toInt().toString() + "s",
+                      //     style: TextStyle(fontSize: 12),
+                      //   )
+                      ? RichText(
+                          text: TextSpan(children: [
+                          TextSpan(
+                            text: " Wait ",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "00:" + time.toInt().toString(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ]))
+                      : TextButton(
+                          onPressed: () {
+                            BlocProvider.of<LogInBloc>(context).add(SendOtpEvent(phoNo: widget.phoneNumber));
+                            SnackBarBuilder().buildSnackBar(context, message: 'Otp Sent!', color: Colors.amber);
+                            _controller.restart();
+                          },
+                          child: Text(
+                            "Resend",
+                            style: TextStyle(color: Colors.amber),
+                          )),
+                  onFinished: () {
+                    setState(() {});
+                  },
+                ),
+              ],
             ),
           ],
         ),

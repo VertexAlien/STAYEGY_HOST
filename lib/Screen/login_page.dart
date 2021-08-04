@@ -32,125 +32,114 @@ class _LoginPageState extends State<LoginPage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        body: BlocListener<LogInBloc, LogInState>(
-          listener: (context, state) {
-            if (state is LoadingState) {
-              LoadingOverlay().build(context);
-            } else if (state is OtpSentState) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => login_otp()));
-            } else if (state is ExceptionState) {
-              Navigator.pop(context);
-
-              SnackBarBuilder().buildSnackBar(
-                context,
-                message: "Error.. Confirm reCaptcha",
-                color: Colors.red,
-              );
-            }
-          },
-          child: Stack(
-            children: <Widget>[
-              //Container for logo
-              Container(
-                alignment: Alignment.topCenter,
-                padding: const EdgeInsets.fromLTRB(90, 200, 70, 0),
-                child: Image.asset('images/stayegy host logo.png'),
-              ),
-              SingleChildScrollView(
+        body: Stack(
+          children: <Widget>[
+            //Container for logo
+            Container(
+              alignment: Alignment.topCenter,
+              padding: const EdgeInsets.fromLTRB(90, 200, 70, 0),
+              child: Image.asset('images/stayegy host logo.png'),
+            ),
+            SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
+                height: 358,
+                padding: EdgeInsets.fromLTRB(30, 150, 30, 150),
                 child: Container(
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
-                  height: 358,
-                  padding: EdgeInsets.fromLTRB(30, 150, 30, 150),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Color(0xffd7d7d7),
-                        width: 1.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(0xffd7d7d7),
+                      width: 1.5,
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          child: Image.asset(
+                            'images/BD Flag.png',
+                            scale: 140,
+                          ),
+                        ),
                       ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            child: Image.asset(
-                              'images/BD Flag.png',
-                              scale: 140,
-                            ),
-                          ),
-                        ),
-                        VerticalDivider(
-                          color: Color(0xffd7d7d7),
-                          thickness: 1,
-                          width: 2,
-                          indent: 8,
-                          endIndent: 8,
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(left: 10),
-                            child: TextField(
-                              keyboardType: TextInputType.phone,
-                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                              onChanged: (value) {
-                                formBloc.add(PhoneNumberCheckEvent(phoneNumber: value));
-                                _phoneNumber = value;
-                              },
-
-                              /// TODO: Decorate the textfield perfectly
-                              decoration: InputDecoration(
-                                hintText: 'Enter Number',
-                                disabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: BlocBuilder<FormBloc, FormStates>(
-                            builder: (context, state) {
-                              return Container(
-                                //color: Colors.black87,
-                                color: state is PhoneNumberNotCheckedState
-                                    ? Colors.black12
-                                    : state is PhoneNumberCheckedState
-                                        ? Colors.black87
-                                        : Colors.black12,
-                                margin: EdgeInsets.only(left: 25),
-                                child: FlatButton(
-                                  onPressed: () {
-                                    print('Pressed!456');
-                                    if (state is PhoneNumberCheckedState) {
-                                      logInBloc.add(
-                                        SendOtpEvent(phoNo: '+880' + _phoneNumber),
-                                      );
-                                    }
-                                  },
-                                  child: Image(
-                                    image: AssetImage(state is PhoneNumberNotCheckedState
-                                        ? 'images/arrow button default.png'
-                                        : state is PhoneNumberCheckedState
-                                            ? 'images/arrow button submit.png'
-                                            : 'images/arrow button default.png'),
-                                  ),
-                                ),
-                              );
+                      VerticalDivider(
+                        color: Color(0xffd7d7d7),
+                        thickness: 1,
+                        width: 2,
+                        indent: 8,
+                        endIndent: 8,
+                      ),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(left: 10),
+                          child: TextField(
+                            keyboardType: TextInputType.phone,
+                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                            onChanged: (value) {
+                              formBloc.add(PhoneNumberCheckEvent(phoneNumber: value));
+                              _phoneNumber = value;
                             },
+
+                            /// TODO: Decorate the textfield perfectly
+                            decoration: InputDecoration(
+                              hintText: 'Enter Number',
+                              disabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                            ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: BlocBuilder<FormBloc, FormStates>(
+                          builder: (context, state) {
+                            return Container(
+                              //color: Colors.black87,
+                              color: state is PhoneNumberNotCheckedState
+                                  ? Colors.black12
+                                  : state is PhoneNumberCheckedState
+                                      ? Colors.black87
+                                      : Colors.black12,
+                              margin: EdgeInsets.only(left: 25),
+                              child: FlatButton(
+                                onPressed: () {
+                                  print('Pressed!456');
+                                  if (state is PhoneNumberCheckedState) {
+                                    logInBloc.add(
+                                      SendOtpEvent(phoNo: '+880' + _phoneNumber),
+                                    );
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginOtp(
+                                                  phoneNumber: '+880' + _phoneNumber,
+                                                )));
+                                  }
+                                },
+                                child: Image(
+                                  image: AssetImage(state is PhoneNumberNotCheckedState
+                                      ? 'images/arrow button default.png'
+                                      : state is PhoneNumberCheckedState
+                                          ? 'images/arrow button submit.png'
+                                          : 'images/arrow button default.png'),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
