@@ -2,12 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stayegy_host/Screen/not_registered.dart';
-
 import 'package:stayegy_host/bloc/Authentication_Bloc/Authentication_States.dart';
 import 'package:stayegy_host/bloc/LoadingBloc/loading_bloc.dart';
 import 'package:stayegy_host/bloc/Login_Bloc/LogIn_Events.dart';
 import 'package:stayegy_host/bloc/Repository/BookRepository/BookRepository.dart';
-
 import 'Screen/Splash_Page.dart';
 import 'Screen/home_page.dart';
 import 'Screen/login_page.dart';
